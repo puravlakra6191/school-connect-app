@@ -1,545 +1,251 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SchoolSync | Your School, In Sync</title>
-
 <style>
-:root {
-  --blue: #3157d5;
-  --dark: #172033;
-  --muted: #6b7280;
-  --bg: #f4f7fc;
-  --line: #e5eaf2;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--dark);
-}
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-header {
-  background: linear-gradient(120deg,#2445b4,#4268ed);
-  color: white;
-  padding: 20px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-.brand { display: flex; gap: 12px; align-items: center; }
-.logo {
-  font-size: 26px;
-  background: #ffffff22;
-  padding: 10px;
-  border-radius: 13px;
-}
-.brand h1 { margin: 0; font-size: 23px; }
-.brand p { margin: 4px 0 0; font-size: 11px; letter-spacing: 1px; }
-button { border: 0; border-radius: 9px; padding: 11px 15px; font-weight: 700; }
-.primary { background: var(--blue); color: white; }
-.light { background: white; color: var(--blue); }
-.outline { background: white; border: 1px solid var(--line); color: var(--dark); }
-.danger { color: #b42318; background: #fff0f0; padding: 7px 10px; }
-.wrap { max-width: 1180px; margin: 28px auto; padding: 0 18px; }
-.hero {
-  display: flex; justify-content: space-between;
-  align-items: center; gap: 18px; flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-.eyebrow {
-  color: var(--blue); font-size: 11px;
-  font-weight: 800; letter-spacing: 1.4px;
-}
-.hero h2 { font-size: 30px; margin: 8px 0; }
-.hero p { color: var(--muted); margin: 0; }
-.switcher { display: flex; gap: 5px; background: #e8edfb; padding: 5px; border-radius: 12px; }
-.switcher button { background: transparent; color: #526079; }
-.switcher button.active { background: white; color: var(--blue); }
-.banner {
-  padding: 13px 15px; background: #eef3ff;
-  border: 1px solid #d9e4ff; border-radius: 12px;
-  color: #354a87; font-size: 13px; line-height: 1.6;
-  margin-bottom: 20px;
-}
-.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
-.stat, .panel {
-  background: white; border: 1px solid var(--line);
-  border-radius: 15px; padding: 20px;
-  box-shadow: 0 8px 25px #24385c0b;
-}
-.stat-label { color: var(--muted); font-size: 13px; }
-.stat strong { display: block; font-size: 30px; margin-top: 10px; }
-.layout { display: grid; grid-template-columns: 1.45fr .8fr; gap: 18px; align-items: start; }
-.panel { margin-bottom: 18px; }
-.panel h3 { margin: 0 0 8px; font-size: 17px; }
-.sub { color: var(--muted); font-size: 13px; line-height: 1.6; }
-label { display: block; font-size: 12px; font-weight: 800; margin: 13px 0 7px; }
-.field {
-  width: 100%; padding: 11px 12px;
-  border: 1px solid #d7deea; border-radius: 9px;
-  background: white; color: var(--dark);
-}
-textarea { resize: vertical; min-height: 100px; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.form-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-.tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
-.tools input { flex: 1; min-width: 150px; }
-.tools select { max-width: 180px; }
-.post {
-  border: 1px solid var(--line); border-radius: 12px;
-  padding: 15px; margin-bottom: 11px; background: white;
-}
-.post-head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
-.post h4 { margin: 8px 0; font-size: 16px; }
-.post p { margin: 0; font-size: 14px; color: #566176; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
-.badge {
-  display: inline-block; background: #eaf0ff; color: #3157d5;
-  padding: 5px 9px; border-radius: 30px; font-size: 11px; font-weight: 800;
-}
-.badge.homework { background: #fff0d7; color: #8b5200; }
-.badge.material { background: #e0f7eb; color: #13704f; }
-.badge.event { background: #f3e6ff; color: #7739ad; }
-.meta { color: #8a94a8; font-size: 11px; margin-top: 12px; line-height: 1.8; }
-.quick {
-  padding: 13px 0; border-bottom: 1px solid var(--line);
-  display: flex; gap: 12px; align-items: center;
-}
-.quick:last-child { border: 0; padding-bottom: 0; }
-.quick-icon { font-size: 20px; background: #eef2ff; padding: 10px; border-radius: 10px; }
-.quick strong { font-size: 13px; display: block; }
-.quick span { color: var(--muted); font-size: 12px; display: block; margin-top: 4px; }
-.empty { text-align: center; padding: 30px 10px; color: var(--muted); border: 1px dashed #d7deea; border-radius: 12px; }
-.hidden { display: none !important; }
-.footer { text-align: center; padding: 8px 0 28px; font-size: 12px; color: #8a94a8; }
-#toast {
-  position: fixed; bottom: 20px; right: 20px;
-  padding: 14px 18px; color: white; background: #172033;
-  border-radius: 10px; box-shadow: 0 5px 20px #0002;
-  max-width: calc(100% - 40px);
-}
-@media(max-width:800px) {
-  .layout { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(2,1fr); }
-  .hero h2 { font-size: 25px; }
-}
-@media(max-width:480px) {
-  .wrap { padding: 0 12px; margin-top: 18px; }
-  .panel, .stat { padding: 15px; }
-  .grid2 { grid-template-columns: 1fr; }
-  header { padding: 14px; }
-  .brand h1 { font-size: 20px; }
-  .stats { gap: 9px; }
-  .stat strong { font-size: 25px; }
-  .switcher { width: 100%; }
-  .switcher button { flex: 1; }
-}
+:root{--bg:#f3f6fd;--card:#fff;--ink:#172033;--mut:#667085;--line:#e4e9f3;--pri:#3157d5;--pri2:#7a4df0;--soft:#eef2ff;--warn:#fff4dc;--ok:#e3f8ec;--bad:#fff0f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#171f35;--ink:#e8ecf7;--mut:#9aa6c2;--line:#27314d;--soft:#1e2a52;--warn:#3a2f12;--ok:#12352a;--bad:#3a1b1b}}
+:root[data-theme="dark"]{--bg:#0e1424;--card:#171f35;--ink:#e8ecf7;--mut:#9aa6c2;--line:#27314d;--soft:#1e2a52;--warn:#3a2f12;--ok:#12352a;--bad:#3a1b1b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 15px;font-weight:700}
+.pri{background:linear-gradient(120deg,var(--pri),var(--pri2));color:#fff}.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}.dng{background:var(--bad);color:#c0392b;padding:6px 10px}.ok{background:var(--ok);color:#13704f;padding:6px 10px}
+.hidden{display:none!important}
+.f{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+label{display:block;font-size:12px;font-weight:800;margin:13px 0 6px;color:var(--mut);letter-spacing:.5px}
+textarea.f{min-height:96px;resize:vertical}
+.login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#1c2f8f,#5a3fd8 60%,#8a4df0);color:#fff}
+.lh{padding:8% 9%;display:flex;flex-direction:column;justify-content:center}
+.lh h1{font-size:46px;margin:14px 0 8px}.lh p{opacity:.85;line-height:1.6;max-width:420px}
+.logo{font-size:34px;background:#ffffff26;display:inline-block;padding:12px;border-radius:16px;width:max-content}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.pills span{background:#ffffff22;padding:8px 13px;border-radius:30px;font-size:13px}
+.lc{display:flex;align-items:center;justify-content:center;padding:24px}
+.lbox{background:var(--card);color:var(--ink);border-radius:22px;padding:28px;width:100%;max-width:420px;box-shadow:0 25px 60px #0004}
+.lbox h2{margin:0 0 4px}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.seg label{margin:0;border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-size:14px;color:var(--ink);cursor:pointer}
+.seg input{display:none}.seg label:has(input:checked){border-color:var(--pri);background:var(--soft);color:var(--pri)}
+header{background:linear-gradient(120deg,#2445b4,#6a47e6);color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:21px}.hr{display:flex;align-items:center;gap:10px}
+.chip{background:#ffffff26;border-radius:30px;padding:7px 14px;font-size:13px}
+.bell{position:relative;background:#ffffff26;color:#fff;padding:9px 12px}.bell b{position:absolute;top:-6px;right:-6px;background:#ef4444;border-radius:20px;font-size:11px;padding:2px 6px}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}
+.tabs{display:flex;gap:6px;background:var(--soft);padding:5px;border-radius:13px;margin-bottom:18px;flex-wrap:wrap}
+.tabs button{flex:1;background:transparent;color:var(--mut)}.tabs button.on{background:var(--card);color:var(--pri);box-shadow:0 2px 8px #0001}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.st,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px #24385c0d}
+.st small{color:var(--mut)}.st b{display:block;font-size:28px;margin-top:6px}
+.panel h3{margin:0 0 4px}.sub{color:var(--mut);font-size:13px;line-height:1.6}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.post{border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:12px;background:var(--card)}
+.post.pers{border-color:var(--pri2);background:linear-gradient(var(--soft),var(--card))}
+.ph{display:flex;justify-content:space-between;gap:10px}.post h4{margin:8px 0 6px}.post p{margin:0;color:var(--mut);font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.bd{display:inline-block;background:var(--soft);color:var(--pri);padding:4px 10px;border-radius:30px;font-size:11px;font-weight:800;margin-right:4px}
+.bd.Homework{background:var(--warn);color:#b7791f}.bd.Material{background:var(--ok);color:#13704f}.bd.Event{background:#f3e6ff;color:#7739ad}.bd.pv{background:var(--pri2);color:#fff}.bd.an{background:var(--bad);color:#c0392b}
+.meta{font-size:12px;color:var(--mut);margin-top:11px;line-height:1.9}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.tools .f{flex:1;min-width:140px}
+.empty{text-align:center;padding:28px;color:var(--mut);border:1px dashed var(--line);border-radius:12px;margin-top:12px}
+.row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;margin:12px 0 0;color:var(--ink);font-weight:600;letter-spacing:0}.chk input{width:auto}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:18px;background:#172033;color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 6px 24px #0004;max-width:calc(100% - 36px);z-index:9}
+@media(max-width:800px){.login{grid-template-columns:1fr}.lh{padding:32px 24px 8px}.lh h1{font-size:34px}.stats{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-<header>
-  <div class="brand">
-    <div class="logo">🏫</div>
-    <div>
-      <h1>SchoolSync</h1>
-      <p>YOUR SCHOOL, IN SYNC.</p>
-    </div>
+<div id="login" class="login">
+  <div class="lh">
+    <div class="logo">🏫</div><h1>SchoolSync</h1>
+    <p>Your school, in sync. Notices, homework, scheduled announcements and private messages — all in one place.</p>
+    <div class="pills"><span>📅 Scheduled posts</span><span>🔔 Personal alerts</span><span>🗣️ Anonymous complaints</span><span>👩‍🏫 Know who posted</span></div>
   </div>
-  <button class="light" id="resetBtn">Reset Demo</button>
-</header>
-
-<main class="wrap">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">SCHOOL COMMUNICATION HUB</div>
-      <h2 id="welcome">Welcome, Teacher 👋</h2>
-      <p id="subtitle">Create updates and keep your school community connected.</p>
-    </div>
-    <div class="switcher">
-      <button class="active" data-role="teacher">👩‍🏫 Teacher View</button>
-      <button data-role="student">🎓 Student View</button>
-    </div>
-  </section>
-
-  <div class="banner">
-    <strong>Interactive Presentation Demo</strong><br>
-    Publish an update as a teacher, then switch to Student View.
-    This prototype saves updates in this browser on this device.
-    It does not yet provide real accounts or cross-device syncing.
+  <div class="lc">
+    <form class="lbox" id="loginForm">
+      <h2>Welcome 👋</h2><div class="sub">Log in to open your dashboard.</div>
+      <label>I AM A</label>
+      <div class="seg"><label><input type="radio" name="role" value="student" checked>🎓 Student</label><label><input type="radio" name="role" value="teacher">👩‍🏫 Teacher</label></div>
+      <label for="lname">FULL NAME</label><input class="f" id="lname" required maxlength="40" placeholder="e.g. Aarav Sharma">
+      <div class="g2">
+        <div><label for="lage">AGE</label><input class="f" id="lage" type="number" min="5" max="80" required placeholder="15"></div>
+        <div id="clsBox"><label for="lcls">CLASS</label><select class="f" id="lcls"></select></div>
+        <div id="subBox" class="hidden"><label for="lsub">SUBJECT / EDUCATION</label><input class="f" id="lsub" maxlength="40" placeholder="Maths, M.Sc."></div>
+      </div>
+      <button class="pri" style="width:100%;margin-top:20px" type="submit">Log in →</button>
+      <p class="sub" style="margin:12px 0 0">Demo login: no password. Students open the Student view, teachers open the Teacher view.</p>
+    </form>
   </div>
+</div>
 
-  <section class="stats">
-    <div class="stat"><div class="stat-label">📣 Total Updates</div><strong id="total">0</strong></div>
-    <div class="stat"><div class="stat-label">🔔 Notices</div><strong id="notices">0</strong></div>
-    <div class="stat"><div class="stat-label">📝 Homework</div><strong id="homework">0</strong></div>
-    <div class="stat"><div class="stat-label">🎉 Events</div><strong id="events">0</strong></div>
-  </section>
+<div id="app" class="hidden">
+  <header>
+    <div class="brand">🏫 SchoolSync</div>
+    <div class="hr"><span class="chip" id="who"></span><button class="bell hidden" id="bell" title="Personal messages">🔔<b id="bellN">0</b></button><button class="ghost" id="out">Log out</button></div>
+  </header>
+  <main class="wrap">
+    <div class="stats" id="stats"></div>
+    <div class="tabs" id="tabs"></div>
 
-  <section id="teacherPage" class="layout">
-    <div>
+    <section id="tpub" class="panel hidden">
+      <h3>✍️ Create an Update</h3><div class="sub">Post to everyone, a class, or one student. Choose when it appears and when it auto-deletes.</div>
+      <form id="pf">
+        <div class="g2">
+          <div><label for="ptype">TYPE</label><select class="f" id="ptype"><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select></div>
+          <div><label for="paud">SEND TO</label><select class="f" id="paud"></select></div>
+        </div>
+        <label for="ptitle">TITLE</label><input class="f" id="ptitle" maxlength="100" required placeholder="e.g. Maths assignment due Monday">
+        <label for="pdet">DETAILS</label><textarea class="f" id="pdet" maxlength="1500" required placeholder="Instructions, dates, other details..."></textarea>
+        <div class="g2">
+          <div><label for="pfrom">SHOW FROM</label><input class="f" type="datetime-local" id="pfrom" required></div>
+          <div><label for="pto">SHOW UNTIL (then auto-deleted)</label><input class="f" type="datetime-local" id="pto" required></div>
+        </div>
+        <div class="row"><button class="pri" type="submit">＋ Publish</button><button class="ghost" type="reset" id="prst">Clear</button></div>
+      </form>
+    </section>
+
+    <section id="tman" class="panel hidden">
+      <h3>📋 Manage Updates</h3><div class="sub">Expired updates are removed automatically.</div>
+      <div class="tools"><input class="f" id="tq" placeholder="Search..."><select class="f" id="tf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="tw"><option value="">All teachers</option><option value="me">Only mine</option></select></div>
+      <div id="tfeed"></div>
+    </section>
+
+    <section id="tcmp" class="panel hidden"><h3>🗣️ Student Complaints</h3><div class="sub">Anonymous complaints hide the student's name from everyone.</div><div id="tcl"></div></section>
+
+    <section id="sbrd" class="panel hidden">
+      <h3>📚 Noticeboard</h3><div class="sub">Every update shows which teacher posted it. Personal messages are highlighted.</div>
+      <div class="tools"><input class="f" id="sq" placeholder="Search..."><select class="f" id="sf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="st2"><option value="">All teachers</option></select><select class="f" id="sp"><option value="">Everything</option><option value="p">Personal only</option></select></div>
+      <div id="sfeed"></div>
+    </section>
+
+    <section id="scmp" class="hidden">
       <div class="panel">
-        <h3>✍️ Create an Update</h3>
-        <p class="sub">Share important information with students.</p>
-
-        <form id="postForm">
-          <div class="grid2">
-            <div>
-              <label for="type">UPDATE TYPE</label>
-              <select class="field" id="type">
-                <option>Important Notice</option>
-                <option>Homework</option>
-                <option>Study Material</option>
-                <option>Event</option>
-              </select>
-            </div>
-            <div>
-              <label for="audience">CLASS / AUDIENCE</label>
-              <select class="field" id="audience">
-                <option>All Students</option>
-                <option>Class 9</option>
-                <option>Class 10</option>
-                <option>Class 11</option>
-                <option>Class 12</option>
-              </select>
-            </div>
+        <h3>📝 Submit a Complaint</h3><div class="sub">Choose who can see it and whether your name is shown.</div>
+        <form id="cf">
+          <label for="ctext">YOUR COMPLAINT</label><textarea class="f" id="ctext" maxlength="1000" required placeholder="Describe the issue..."></textarea>
+          <div class="g2">
+            <div><label for="cvis">VISIBILITY</label><select class="f" id="cvis"><option value="public">🌍 Public (all students & teachers)</option><option value="private">🔒 Private (teachers only)</option></select></div>
+            <div><label>&nbsp;</label><label class="chk"><input type="checkbox" id="canon"> Hide my name (anonymous)</label></div>
           </div>
-
-          <label for="title">TITLE</label>
-          <input class="field" id="title" maxlength="100"
-                 placeholder="e.g. Mathematics Assignment Due Monday" required>
-
-          <label for="details">DETAILS</label>
-          <textarea class="field" id="details" maxlength="1500"
-                    placeholder="Enter instructions, dates, or other important details..." required></textarea>
-
-          <div class="form-actions">
-            <button class="primary" type="submit">＋ Publish Update</button>
-            <button class="outline" type="reset">Clear Form</button>
-          </div>
+          <div class="row"><button class="pri" type="submit">Submit complaint</button></div>
         </form>
       </div>
-
-      <div class="panel">
-        <h3>📋 Manage Updates</h3>
-        <p class="sub">Search, filter, or delete published updates.</p>
-        <div class="tools">
-          <input class="field" id="teacherSearch" placeholder="Search updates...">
-          <select class="field" id="teacherFilter">
-            <option value="All">All Types</option>
-            <option>Important Notice</option>
-            <option>Homework</option>
-            <option>Study Material</option>
-            <option>Event</option>
-          </select>
-        </div>
-        <div id="teacherFeed"></div>
-      </div>
-    </div>
-
-    <aside>
-      <div class="panel">
-        <h3>✨ SchoolSync Features</h3>
-        <div class="quick"><div class="quick-icon">📢</div><div><strong>Centralised Notices</strong><span>Announcements in one place.</span></div></div>
-        <div class="quick"><div class="quick-icon">📚</div><div><strong>Learning Resources</strong><span>Organised homework and materials.</span></div></div>
-        <div class="quick"><div class="quick-icon">🔎</div><div><strong>Quick Search</strong><span>Find information faster.</span></div></div>
-        <div class="quick"><div class="quick-icon">📱</div><div><strong>Responsive Design</strong><span>Works on phones and computers.</span></div></div>
-      </div>
-      <div class="panel">
-        <h3>💡 Presentation Tip</h3>
-        <p class="sub">Publish a homework update, switch to Student View, and demonstrate how students find it using search and filters.</p>
-      </div>
-    </aside>
-  </section>
-
-  <section id="studentPage" class="layout hidden">
-    <div class="panel">
-      <h3>📚 Student Noticeboard</h3>
-      <p class="sub">School updates organised in one place.</p>
-      <div class="tools">
-        <input class="field" id="studentSearch" placeholder="Search notices, homework, events...">
-        <select class="field" id="studentFilter">
-          <option value="All">All Types</option>
-          <option>Important Notice</option>
-          <option>Homework</option>
-          <option>Study Material</option>
-          <option>Event</option>
-        </select>
-        <select class="field" id="classFilter">
-          <option>All Classes</option>
-          <option>Class 9</option>
-          <option>Class 10</option>
-          <option>Class 11</option>
-          <option>Class 12</option>
-        </select>
-      </div>
-      <div id="studentFeed"></div>
-    </div>
-
-    <aside>
-      <div class="panel">
-        <h3>🎯 Your Learning Hub</h3>
-        <div class="quick"><div class="quick-icon">🔔</div><div><strong>Stay Informed</strong><span>Check important notices.</span></div></div>
-        <div class="quick"><div class="quick-icon">✏️</div><div><strong>Track Homework</strong><span>Review assignment instructions.</span></div></div>
-        <div class="quick"><div class="quick-icon">📅</div><div><strong>Find Events</strong><span>Discover school activities.</span></div></div>
-      </div>
-      <div class="panel">
-        <h3>📊 Noticeboard Summary</h3>
-        <p class="sub" id="summary">There are 0 updates available.</p>
-      </div>
-    </aside>
-  </section>
-
-  <div class="footer">SchoolSync • Your School, In Sync. • Prototype for presentation purposes</div>
-</main>
-
+      <div class="panel" style="margin-top:16px"><h3>Complaints</h3><div class="sub">Public complaints plus your own private ones.</div><div id="scl"></div></div>
+    </section>
+  </main>
+</div>
 <div id="toast" class="hidden" role="status"></div>
 
 <script>
-const STORAGE_KEY = "schoolsync_demo_posts_v2";
+const K={u:"ss3_users",p:"ss3_posts",c:"ss3_comps",s:"ss3_sess",r:"ss3_read"};
+const CLASSES=["Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"];
+const $=id=>document.getElementById(id);
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{toast("Storage unavailable: changes won't persist.")}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const H=36e5,D=24*H,now=()=>Date.now();
+const loc=t=>new Date(t-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
+const fmt=t=>new Date(t).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+const seed={
+ users:[{id:"t1",name:"Ms. Sharma",role:"teacher",age:34,sub:"Mathematics"},{id:"t2",name:"Mr. Verma",role:"teacher",age:41,sub:"Physics"},{id:"s1",name:"Aarav",role:"student",age:15,cls:"Class 10"},{id:"s2",name:"Meera",role:"student",age:14,cls:"Class 9"}],
+ posts:[{id:"p1",type:"Important Notice",aud:"all",title:"Science Test on Friday",det:"Covers Chapters 1 and 2. Revise your notes and bring stationery.",from:now()-H,to:now()+5*D,by:"t2"},
+  {id:"p2",type:"Homework",aud:"Class 10",title:"Mathematics Practice",det:"Complete questions 1–20 from the worksheet.",from:now()-2*H,to:now()+3*D,by:"t1"},
+  {id:"p3",type:"Important Notice",aud:"u:s1",title:"Please meet me after class",det:"Aarav, please see me after 3rd period about your project.",from:now()-H/2,to:now()+2*D,by:"t1"}]};
+let users=ld(K.u,null)||seed.users,posts=ld(K.p,null)||seed.posts,comps=ld(K.c,[]),reads=ld(K.r,{}),me=null,tab="",tmr;
+const uById=id=>users.find(u=>u.id===id);
+const audLabel=a=>a==="all"?"All students":a.startsWith("u:")?"🔒 "+(uById(a.slice(2))?.name||"Student"):a;
+const isMine=p=>me&&me.role==="student"&&(p.aud==="all"||p.aud===me.cls||p.aud==="u:"+me.id);
+const isPers=p=>p.aud.startsWith("u:");
+const live=p=>p.from<=now()&&p.to>now();
+const unread=()=>posts.filter(p=>live(p)&&p.aud==="u:"+me.id&&!(reads[me.id]||[]).includes(p.id));
 
-const samplePosts = [
-  {
-    id: "sample1",
-    type: "Important Notice",
-    audience: "All Students",
-    title: "Science Test on Friday",
-    details: "The Science test will cover Chapters 1 and 2. Please revise your class notes and bring the required stationery.",
-    time: Date.now() - 3600000
-  },
-  {
-    id: "sample2",
-    type: "Homework",
-    audience: "Class 10",
-    title: "Mathematics Practice",
-    details: "Complete questions 1–20 from the assigned worksheet. Bring your completed work to the next class.",
-    time: Date.now() - 7200000
-  },
-  {
-    id: "sample3",
-    type: "Study Material",
-    audience: "Class 11",
-    title: "Physics Revision Notes",
-    details: "Revision notes for the current chapter are ready. Review the key formulas and solve the examples before the next lesson.",
-    time: Date.now() - 86400000
-  },
-  {
-    id: "sample4",
-    type: "Event",
-    audience: "All Students",
-    title: "School Innovation Day",
-    details: "Join us for student project displays and creative ideas. Ask your teacher for participation details.",
-    time: Date.now() - 172800000
-  }
-];
+function toast(m){const t=$("toast");t.textContent=m;t.classList.remove("hidden");clearTimeout(tmr);tmr=setTimeout(()=>t.classList.add("hidden"),3000)}
+function purge(){const n=posts.length;posts=posts.filter(p=>p.to>now());if(posts.length!==n){sv(K.p,posts);return true}return false}
+function saveAll(){sv(K.u,users);sv(K.p,posts);sv(K.c,comps);sv(K.r,reads)}
 
-function loadPosts() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : samplePosts.map(p => ({...p}));
-  } catch {
-    return samplePosts.map(p => ({...p}));
-  }
-}
+$("lcls").innerHTML=CLASSES.map(c=>`<option>${c}</option>`).join("");
+document.querySelectorAll('[name=role]').forEach(r=>r.onchange=()=>{const t=r.value==="teacher"&&r.checked;$("clsBox").classList.toggle("hidden",t);$("subBox").classList.toggle("hidden",!t)});
+$("loginForm").onsubmit=e=>{e.preventDefault();
+ const role=document.querySelector('[name=role]:checked').value,name=$("lname").value.trim(),age=+$("lage").value;
+ let u=users.find(x=>x.role===role&&x.name.toLowerCase()===name.toLowerCase());
+ if(!u){u={id:(role==="teacher"?"t":"s")+now().toString(36),name,role};users.push(u)}
+ u.age=age;if(role==="student")u.cls=$("lcls").value;else u.sub=$("lsub").value.trim()||"Teacher";
+ saveAll();sv(K.s,u.id);start(u)};
+$("out").onclick=()=>{try{localStorage.removeItem(K.s)}catch{}me=null;$("app").classList.add("hidden");$("login").classList.remove("hidden")};
 
-let posts = loadPosts();
-let toastTimer;
+function start(u){me=u;$("login").classList.add("hidden");$("app").classList.remove("hidden");
+ const t=u.role==="teacher";
+ $("who").textContent=(t?"👩‍🏫 ":"🎓 ")+u.name+" • "+(t?u.sub:u.cls)+" • Age "+u.age;
+ $("bell").classList.toggle("hidden",t);
+ const tabs=t?[["tpub","✍️ Publish"],["tman","📋 Updates"],["tcmp","🗣️ Complaints"]]:[["sbrd","📚 Noticeboard"],["scmp","📝 Complaints"]];
+ $("tabs").innerHTML=tabs.map(x=>`<button data-tab="${x[0]}">${x[1]}</button>`).join("");
+ fillAud();$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D);
+ setTab(tabs[0][0]);purge();render();
+ if(!t){const n=unread().length;if(n)toast(`🔔 You have ${n} new personal message${n>1?"s":""}!`)}}
+$("tabs").onclick=e=>{const b=e.target.closest("[data-tab]");if(b)setTab(b.dataset.tab)};
+function setTab(t){tab=t;["tpub","tman","tcmp","sbrd","scmp"].forEach(id=>$(id).classList.toggle("hidden",id!==t));
+ document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t))}
+$("bell").onclick=()=>{setTab("sbrd");$("sp").value="p";render()};
 
-function savePosts() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-  } catch {
-    showToast("Browser storage is unavailable. Changes may not persist.");
-  }
-}
+function fillAud(){$("paud").innerHTML='<option value="all">All students</option>'+CLASSES.map(c=>`<option>${c}</option>`).join("")+
+ '<optgroup label="Single student (personal alert)">'+users.filter(u=>u.role==="student").map(u=>`<option value="u:${u.id}">${esc(u.name)} (${esc(u.cls||"")})</option>`).join("")+"</optgroup>"}
+$("pf").onsubmit=e=>{e.preventDefault();
+ const from=new Date($("pfrom").value).getTime(),to=new Date($("pto").value).getTime();
+ if(!(to>from)||to<=now()){toast("“Show until” must be after “Show from” and in the future.");return}
+ posts.unshift({id:"p"+now().toString(36)+Math.random().toString(16).slice(2,5),type:$("ptype").value,aud:$("paud").value,title:$("ptitle").value.trim(),det:$("pdet").value.trim(),from,to,by:me.id});
+ sv(K.p,posts);e.target.reset();$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D);render();
+ toast(from>now()?"Scheduled! It will appear automatically.":"Published!");setTab("tman")};
+$("prst").onclick=()=>setTimeout(()=>{$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D)});
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;",
-    '"':"&quot;", "'":"&#39;"
-  }[char]));
-}
+function postCard(p,teacher){
+ const by=uById(p.by),status=!live(p)?"⏳ Scheduled":"🟢 Live",seen=isPers(p)?((reads[p.aud.slice(2)]||[]).includes(p.id)?"✓ Seen":"Not seen yet"):"";
+ return `<article class="post ${isPers(p)?"pers":""}"><div class="ph"><div><span class="bd ${p.type.split(" ")[1]||p.type}">${esc(p.type)}</span>${isPers(p)?'<span class="bd pv">🔔 Personal</span>':""}<h4>${esc(p.title)}</h4></div>
+ ${teacher&&p.by===me.id?`<button class="dng" data-del="${p.id}">Delete</button>`:""}${!teacher&&isPers(p)&&!(reads[me.id]||[]).includes(p.id)?`<button class="ok" data-read="${p.id}">Got it ✓</button>`:""}</div>
+ <p>${esc(p.det)}</p><div class="meta">👩‍🏫 ${esc(by?by.name+" ("+(by.sub||"Teacher")+")":"Teacher")} • 👥 ${esc(audLabel(p.aud))}<br>
+ 🕒 Shows ${fmt(p.from)} → auto-deletes ${fmt(p.to)}${teacher?" • "+status+(seen?" • "+seen:""):""}</div></article>`}
+const empty='<div class="empty"><strong>Nothing here yet.</strong><br>Try changing the filters.</div>';
+const match=(p,q,t)=>(!t||p.type===t)&&`${p.title} ${p.det} ${p.type}`.toLowerCase().includes(q.toLowerCase().trim());
 
-function badgeClass(type) {
-  if (type === "Homework") return "homework";
-  if (type === "Study Material") return "material";
-  if (type === "Event") return "event";
-  return "";
-}
+function render(){
+ if(!me)return;purge();const t=me.role==="teacher";
+ const vis=t?posts:posts.filter(p=>live(p)&&isMine(p));
+ const c=x=>vis.filter(p=>p.type===x).length;
+ const cl=comps.filter(x=>t||x.pub||x.uid===me.id);
+ $("stats").innerHTML=[["📣 Updates",vis.length],["🔔 Notices",c("Important Notice")],["📝 Homework",c("Homework")],[t?"🗣️ Complaints":"🔔 Unread personal",t?comps.filter(x=>!x.done).length:unread().length]].map(s=>`<div class="st"><small>${s[0]}</small><b>${s[1]}</b></div>`).join("");
+ if(t){
+  let l=posts.filter(p=>match(p,$("tq").value,$("tf").value)&&($("tw").value!=="me"||p.by===me.id));
+  $("tfeed").innerHTML=l.length?l.map(p=>postCard(p,true)).join(""):empty;
+  $("tcl").innerHTML=cl.length?cl.map(x=>compCard(x,true)).join(""):empty;
+ }else{
+  const un=unread().length;$("bellN").textContent=un;$("bellN").classList.toggle("hidden",!un);
+  const sel=$("st2"),cur=sel.value,names=[...new Set(posts.filter(p=>live(p)&&isMine(p)).map(p=>p.by))];
+  sel.innerHTML='<option value="">All teachers</option>'+names.map(id=>`<option value="${id}">${esc(uById(id)?.name||"Teacher")}</option>`).join("");sel.value=names.includes(cur)?cur:"";
+  let l=vis.filter(p=>match(p,$("sq").value,$("sf").value)&&(!sel.value||p.by===sel.value)&&($("sp").value!=="p"||isPers(p)));
+  l.sort((a,b)=>isPers(b)-isPers(a)||b.from-a.from);
+  $("sfeed").innerHTML=l.length?l.map(p=>postCard(p,false)).join(""):empty;
+  $("scl").innerHTML=cl.length?cl.map(x=>compCard(x,false)).join(""):empty;
+ }}
+function compCard(x,t){
+ const who=x.anon?"Anonymous":(x.name||"Student"),own=!t&&x.uid===me.id;
+ return `<article class="post"><div class="ph"><div><span class="bd">${x.pub?"🌍 Public":"🔒 Private"}</span>${x.anon?'<span class="bd an">🕶️ Anonymous</span>':""}${x.done?'<span class="bd Material">✔ Resolved</span>':""}</div>
+ <div class="row" style="margin:0">${t?`<button class="ok" data-res="${x.id}">${x.done?"Reopen":"Mark resolved"}</button>`:""}${own?`<button class="dng" data-cdel="${x.id}">Delete</button>`:""}</div></div>
+ <p style="margin-top:10px">${esc(x.text)}</p><div class="meta">👤 ${esc(who)}${own&&x.anon?" (only you know this is yours)":""} • 🕒 ${fmt(x.time)}</div></article>`}
+$("cf").onsubmit=e=>{e.preventDefault();
+ comps.unshift({id:"c"+now().toString(36),text:$("ctext").value.trim(),pub:$("cvis").value==="public",anon:$("canon").checked,uid:me.id,name:me.name,time:now(),done:false});
+ sv(K.c,comps);e.target.reset();render();toast("Complaint submitted.")};
 
-function formatDate(timestamp) {
-  return new Date(timestamp).toLocaleString([], {
-    month: "short", day: "numeric",
-    hour: "numeric", minute: "2-digit"
-  });
-}
+document.body.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+ if(d.del&&confirm("Delete this update?")){posts=posts.filter(p=>p.id!==d.del);sv(K.p,posts)}
+ else if(d.read){(reads[me.id]=reads[me.id]||[]).push(d.read);sv(K.r,reads)}
+ else if(d.res){const x=comps.find(c=>c.id===d.res);x.done=!x.done;sv(K.c,comps)}
+ else if(d.cdel&&confirm("Delete your complaint?")){comps=comps.filter(c=>c.id!==d.cdel);sv(K.c,comps)}
+ else return;render()});
+["tq","tf","tw","sq","sf","st2","sp"].forEach(id=>{$(id).addEventListener("input",render);$(id).addEventListener("change",render)});
 
-function postHTML(post, deletable) {
-  return `
-    <article class="post">
-      <div class="post-head">
-        <div>
-          <span class="badge ${badgeClass(post.type)}">${escapeHTML(post.type)}</span>
-          <h4>${escapeHTML(post.title)}</h4>
-        </div>
-        ${deletable ? `<button class="danger" data-delete="${escapeHTML(post.id)}">Delete</button>` : ""}
-      </div>
-      <p>${escapeHTML(post.details)}</p>
-      <div class="meta">
-        👥 ${escapeHTML(post.audience)} &nbsp; • &nbsp;
-        🕒 ${escapeHTML(formatDate(post.time))}
-      </div>
-    </article>`;
-}
-
-function emptyHTML() {
-  return '<div class="empty"><strong>No updates found.</strong><br>Try another search or publish a new update.</div>';
-}
-
-function filterPosts(search, type, audience) {
-  const term = search.toLowerCase().trim();
-  return posts.filter(post => {
-    const matchesType = type === "All" || post.type === type;
-    const matchesAudience =
-      !audience ||
-      audience === "All Classes" ||
-      post.audience === "All Students" ||
-      post.audience === audience;
-    const text = `${post.title} ${post.details} ${post.type} ${post.audience}`.toLowerCase();
-    return matchesType && matchesAudience && text.includes(term);
-  });
-}
-
-function renderFeed(elementId, list, deletable) {
-  const element = document.getElementById(elementId);
-  element.innerHTML = list.length
-    ? list.map(post => postHTML(post, deletable)).join("")
-    : emptyHTML();
-}
-
-function render() {
-  document.getElementById("total").textContent = posts.length;
-  document.getElementById("notices").textContent =
-    posts.filter(p => p.type === "Important Notice").length;
-  document.getElementById("homework").textContent =
-    posts.filter(p => p.type === "Homework").length;
-  document.getElementById("events").textContent =
-    posts.filter(p => p.type === "Event").length;
-
-  const teacherPosts = filterPosts(
-    document.getElementById("teacherSearch").value,
-    document.getElementById("teacherFilter").value,
-    ""
-  );
-  renderFeed("teacherFeed", teacherPosts, true);
-
-  const studentPosts = filterPosts(
-    document.getElementById("studentSearch").value,
-    document.getElementById("studentFilter").value,
-    document.getElementById("classFilter").value
-  );
-  renderFeed("studentFeed", studentPosts, false);
-
-  document.getElementById("summary").textContent =
-    `There are ${posts.length} updates available, including ` +
-    `${posts.filter(p => p.type === "Homework").length} homework posts.`;
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.remove("hidden");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.add("hidden"), 2500);
-}
-
-function switchRole(role) {
-  document.querySelectorAll("[data-role]").forEach(button => {
-    button.classList.toggle("active", button.dataset.role === role);
-  });
-
-  document.getElementById("teacherPage").classList.toggle("hidden", role !== "teacher");
-  document.getElementById("studentPage").classList.toggle("hidden", role !== "student");
-
-  document.getElementById("welcome").textContent =
-    role === "teacher" ? "Welcome, Teacher 👋" : "Welcome back, Student 👋";
-
-  document.getElementById("subtitle").textContent =
-    role === "teacher"
-      ? "Create updates and keep your school community connected."
-      : "Everything you need to know about your school, in one place.";
-
-  render();
-}
-
-document.querySelectorAll("[data-role]").forEach(button => {
-  button.addEventListener("click", () => switchRole(button.dataset.role));
-});
-
-document.getElementById("postForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const title = document.getElementById("title").value.trim();
-  const details = document.getElementById("details").value.trim();
-
-  if (!title || !details) {
-    showToast("Please complete the title and details.");
-    return;
-  }
-
-  posts.unshift({
-    id: String(Date.now()) + Math.random().toString(16).slice(2),
-    type: document.getElementById("type").value,
-    audience: document.getElementById("audience").value,
-    title,
-    details,
-    time: Date.now()
-  });
-
-  savePosts();
-  event.target.reset();
-  render();
-  showToast("Update published successfully!");
-});
-
-document.body.addEventListener("click", event => {
-  const button = event.target.closest("[data-delete]");
-  if (!button) return;
-
-  const post = posts.find(p => p.id === button.dataset.delete);
-  if (!post) return;
-
-  if (confirm(`Delete "${post.title}"?`)) {
-    posts = posts.filter(p => p.id !== post.id);
-    savePosts();
-    render();
-    showToast("Update deleted.");
-  }
-});
-
-[
-  "teacherSearch", "teacherFilter",
-  "studentSearch", "studentFilter", "classFilter"
-].forEach(id => {
-  document.getElementById(id).addEventListener("input", render);
-  document.getElementById(id).addEventListener("change", render);
-});
-
-document.getElementById("resetBtn").addEventListener("click", () => {
-  if (confirm("Restore the original sample updates? Your changes will be removed.")) {
-    posts = samplePosts.map(p => ({...p}));
-    savePosts();
-    render();
-    showToast("Sample updates restored.");
-  }
-});
-
-render();
+window.addEventListener("storage",()=>{if(!me)return;const before=me.role==="student"?unread().length:0;
+ users=ld(K.u,users);posts=ld(K.p,posts);comps=ld(K.c,comps);reads=ld(K.r,reads);render();
+ if(me.role==="student"&&unread().length>before)toast("🔔 New personal message from your teacher!")});
+setInterval(()=>{if(me)render()},30000);
+const sid=ld(K.s,null),su=sid&&uById(sid);if(su)start(su);
 </script>
 </body>
 </html>
