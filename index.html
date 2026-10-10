@@ -8,244 +8,298 @@
 :root{--bg:#f3f6fd;--card:#fff;--ink:#172033;--mut:#667085;--line:#e4e9f3;--pri:#3157d5;--pri2:#7a4df0;--soft:#eef2ff;--warn:#fff4dc;--ok:#e3f8ec;--bad:#fff0f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#171f35;--ink:#e8ecf7;--mut:#9aa6c2;--line:#27314d;--soft:#1e2a52;--warn:#3a2f12;--ok:#12352a;--bad:#3a1b1b}}
 :root[data-theme="dark"]{--bg:#0e1424;--card:#171f35;--ink:#e8ecf7;--mut:#9aa6c2;--line:#27314d;--soft:#1e2a52;--warn:#3a2f12;--ok:#12352a;--bad:#3a1b1b}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
 body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 15px;font-weight:700}
-.pri{background:linear-gradient(120deg,var(--pri),var(--pri2));color:#fff}.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}.dng{background:var(--bad);color:#c0392b;padding:6px 10px}.ok{background:var(--ok);color:#13704f;padding:6px 10px}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 15px;font-weight:700;transition:transform .15s,box-shadow .2s}
+button:hover{transform:translateY(-2px)}button:active{transform:scale(.96)}
+.pri{background:linear-gradient(120deg,var(--pri),var(--pri2));color:#fff;box-shadow:0 6px 16px #5a3fd855}.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}.dng{background:var(--bad);color:#c0392b;padding:6px 10px}.ok{background:var(--ok);color:#13704f;padding:6px 10px}
 .hidden{display:none!important}
-.f{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
-label{display:block;font-size:12px;font-weight:800;margin:13px 0 6px;color:var(--mut);letter-spacing:.5px}
-textarea.f{min-height:96px;resize:vertical}
-.login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#1c2f8f,#5a3fd8 60%,#8a4df0);color:#fff}
-.lh{padding:8% 9%;display:flex;flex-direction:column;justify-content:center}
-.lh h1{font-size:46px;margin:14px 0 8px}.lh p{opacity:.85;line-height:1.6;max-width:420px}
-.logo{font-size:34px;background:#ffffff26;display:inline-block;padding:12px;border-radius:16px;width:max-content}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.pills span{background:#ffffff22;padding:8px 13px;border-radius:30px;font-size:13px}
-.lc{display:flex;align-items:center;justify-content:center;padding:24px}
-.lbox{background:var(--card);color:var(--ink);border-radius:22px;padding:28px;width:100%;max-width:420px;box-shadow:0 25px 60px #0004}
-.lbox h2{margin:0 0 4px}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
-.seg label{margin:0;border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-size:14px;color:var(--ink);cursor:pointer}
-.seg input{display:none}.seg label:has(input:checked){border-color:var(--pri);background:var(--soft);color:var(--pri)}
-header{background:linear-gradient(120deg,#2445b4,#6a47e6);color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.brand{font-weight:800;font-size:21px}.hr{display:flex;align-items:center;gap:10px}
-.chip{background:#ffffff26;border-radius:30px;padding:7px 14px;font-size:13px}
-.bell{position:relative;background:#ffffff26;color:#fff;padding:9px 12px}.bell b{position:absolute;top:-6px;right:-6px;background:#ef4444;border-radius:20px;font-size:11px;padding:2px 6px}
-.wrap{max-width:1100px;margin:22px auto;padding:0 16px}
-.tabs{display:flex;gap:6px;background:var(--soft);padding:5px;border-radius:13px;margin-bottom:18px;flex-wrap:wrap}
-.tabs button{flex:1;background:transparent;color:var(--mut)}.tabs button.on{background:var(--card);color:var(--pri);box-shadow:0 2px 8px #0001}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.st,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px #24385c0d}
-.st small{color:var(--mut)}.st b{display:block;font-size:28px;margin-top:6px}
-.panel h3{margin:0 0 4px}.sub{color:var(--mut);font-size:13px;line-height:1.6}
+.f{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);transition:border .2s,box-shadow .2s}.f:focus{outline:0;border-color:var(--pri);box-shadow:0 0 0 3px #3157d522}
+label{display:block;font-size:12px;font-weight:800;margin:13px 0 6px;color:var(--mut);letter-spacing:.5px}textarea.f{min-height:90px;resize:vertical}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-26px) scale(1.06)}}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(14deg)}40%{transform:rotate(-12deg)}60%{transform:rotate(8deg)}80%{transform:rotate(-6deg)}}
+@keyframes grad{50%{background-position:100% 50%}}
+@keyframes slide{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.anim .post,.anim .st,.anim .panel,.anim .stu{animation:up .55s both;animation-delay:calc(var(--i,0)*55ms)}
+.login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#1c2f8f,#5a3fd8,#9b4df0,#1c2f8f);background-size:300% 300%;animation:grad 14s ease infinite;color:#fff;position:relative;overflow:hidden}
+.blob{position:absolute;border-radius:50%;background:#ffffff1c;animation:float 7s ease-in-out infinite}
+.lh{padding:8% 9%;display:flex;flex-direction:column;justify-content:center;position:relative;animation:up .8s both}.lh h1{font-size:46px;margin:14px 0 8px}.lh p{opacity:.88;line-height:1.6;max-width:420px}
+.logo{font-size:34px;background:#ffffff26;display:inline-block;padding:12px;border-radius:16px;width:max-content;animation:float 5s ease-in-out infinite}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.pills span{background:#ffffff22;padding:8px 13px;border-radius:30px;font-size:13px;backdrop-filter:blur(6px)}
+.lc{display:flex;align-items:center;justify-content:center;padding:24px;position:relative}
+.lbox{background:var(--card);color:var(--ink);border-radius:22px;padding:26px;width:100%;max-width:440px;box-shadow:0 25px 60px #0004;animation:pop .6s both}
+.at{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);padding:5px;border-radius:12px;margin-bottom:6px}.at button{background:transparent;color:var(--mut)}.at button.on{background:var(--card);color:var(--pri)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}.seg label{margin:0;border:2px solid var(--line);border-radius:12px;padding:11px;text-align:center;font-size:14px;color:var(--ink);cursor:pointer;transition:.2s}.seg input{display:none}.seg label:has(input:checked){border-color:var(--pri);background:var(--soft);color:var(--pri)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.post{border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:12px;background:var(--card)}
+header{background:linear-gradient(120deg,#2445b4,#6a47e6,#9b4df0);background-size:200% 200%;animation:grad 12s ease infinite;color:#fff;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:21px}.hr{display:flex;align-items:center;gap:10px}.chip{background:#ffffff26;border-radius:30px;padding:5px 14px 5px 5px;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.av{border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;flex:none}
+.bell{position:relative;background:#ffffff26;color:#fff;padding:9px 12px}.bell.ring{animation:shake 1.2s infinite}.bell.act{background:#fff;color:var(--pri)}.bell b{position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border-radius:20px;font-size:11px;padding:2px 6px}
+.wrap{max-width:1100px;margin:22px auto;padding:0 16px}
+.tabs{display:flex;gap:6px;background:var(--soft);padding:5px;border-radius:13px;margin-bottom:18px;flex-wrap:wrap}.tabs button{flex:1;background:transparent;color:var(--mut);white-space:nowrap}.tabs button.on{background:var(--card);color:var(--pri);box-shadow:0 2px 8px #0001}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.st,.panel,.stu{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px #24385c0d}
+.st{transition:transform .2s}.st:hover{transform:translateY(-4px)}.st small{color:var(--mut)}.st b{display:block;font-size:28px;margin-top:6px}
+.panel h3{margin:0 0 4px}.sub{color:var(--mut);font-size:13px;line-height:1.6}
+.post{border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:12px;background:var(--card);cursor:pointer;transition:transform .2s,box-shadow .2s}.post:hover{transform:translateY(-3px);box-shadow:0 12px 26px #3157d522}
 .post.pers{border-color:var(--pri2);background:linear-gradient(var(--soft),var(--card))}
-.ph{display:flex;justify-content:space-between;gap:10px}.post h4{margin:8px 0 6px}.post p{margin:0;color:var(--mut);font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
-.bd{display:inline-block;background:var(--soft);color:var(--pri);padding:4px 10px;border-radius:30px;font-size:11px;font-weight:800;margin-right:4px}
-.bd.Homework{background:var(--warn);color:#b7791f}.bd.Material{background:var(--ok);color:#13704f}.bd.Event{background:#f3e6ff;color:#7739ad}.bd.pv{background:var(--pri2);color:#fff}.bd.an{background:var(--bad);color:#c0392b}
+.ph{display:flex;justify-content:space-between;gap:10px}.post h4{margin:8px 0 6px}.post p{margin:0;color:var(--mut);font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bd{display:inline-block;background:var(--soft);color:var(--pri);padding:4px 10px;border-radius:30px;font-size:11px;font-weight:800;margin:0 4px 2px 0}.bd.Homework{background:var(--warn);color:#b7791f}.bd.Study{background:var(--ok);color:#13704f}.bd.Event{background:#f3e6ff;color:#7739ad}.bd.pv{background:var(--pri2);color:#fff}.bd.an{background:var(--bad);color:#c0392b}
 .meta{font-size:12px;color:var(--mut);margin-top:11px;line-height:1.9}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.tools .f{flex:1;min-width:140px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.tools .f{flex:1;min-width:130px}
 .empty{text-align:center;padding:28px;color:var(--mut);border:1px dashed var(--line);border-radius:12px;margin-top:12px}
-.row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
-.chk{display:flex;gap:8px;align-items:center;font-size:14px;margin:12px 0 0;color:var(--ink);font-weight:600;letter-spacing:0}.chk input{width:auto}
-#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:18px;background:#172033;color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 6px 24px #0004;max-width:calc(100% - 36px);z-index:9}
-@media(max-width:800px){.login{grid-template-columns:1fr}.lh{padding:32px 24px 8px}.lh h1{font-size:34px}.stats{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+.row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}.chk{display:flex;gap:8px;align-items:center;font-size:14px;margin:8px 0 0;color:var(--ink);font-weight:600;letter-spacing:0}.chk input{width:auto}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}.stu{display:flex;gap:12px;align-items:center;padding:14px}.stu strong{display:block}
+.cg{display:grid;grid-template-columns:280px 1fr;gap:16px}
+.cv{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;color:var(--ink);padding:9px;border-radius:12px;margin-top:4px}.cv.on,.cv:hover{background:var(--soft)}.cv small{display:block;color:var(--mut);font-weight:400}
+#msgs{height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg);border-radius:12px;margin:12px 0}
+.b{max-width:78%;padding:9px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-size:14px;align-self:flex-start;animation:pop .25s;overflow-wrap:anywhere}.b.me{align-self:flex-end;background:linear-gradient(120deg,var(--pri),var(--pri2));color:#fff;border:0}.b small{display:block;opacity:.75;font-size:11px;margin-bottom:3px}
+#md{position:fixed;inset:0;background:#0009;display:flex;align-items:center;justify-content:center;padding:18px;z-index:8;backdrop-filter:blur(4px);animation:pop .2s}
+.mb{background:var(--card);border-radius:20px;padding:24px;max-width:600px;width:100%;max-height:88vh;overflow:auto;animation:pop .3s}.mb h2{margin:8px 0}.mb .txt{white-space:pre-wrap;line-height:1.7;overflow-wrap:anywhere}.mb img.pv,.mb iframe{max-width:100%;width:100%;border-radius:12px;margin-top:12px;border:1px solid var(--line)}.mb iframe{height:340px}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:18px;background:#172033;color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 6px 24px #0004;max-width:calc(100% - 36px);z-index:9;animation:slide .3s}
+@media(max-width:800px){.login{grid-template-columns:1fr}.lh{padding:32px 24px 8px}.lh h1{font-size:34px}.stats{grid-template-columns:repeat(2,1fr)}.g2,.cg{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div id="login" class="login">
-  <div class="lh">
-    <div class="logo">🏫</div><h1>SchoolSync</h1>
-    <p>Your school, in sync. Notices, homework, scheduled announcements and private messages — all in one place.</p>
-    <div class="pills"><span>📅 Scheduled posts</span><span>🔔 Personal alerts</span><span>🗣️ Anonymous complaints</span><span>👩‍🏫 Know who posted</span></div>
-  </div>
-  <div class="lc">
-    <form class="lbox" id="loginForm">
-      <h2>Welcome 👋</h2><div class="sub">Log in to open your dashboard.</div>
-      <label>I AM A</label>
-      <div class="seg"><label><input type="radio" name="role" value="student" checked>🎓 Student</label><label><input type="radio" name="role" value="teacher">👩‍🏫 Teacher</label></div>
-      <label for="lname">FULL NAME</label><input class="f" id="lname" required maxlength="40" placeholder="e.g. Aarav Sharma">
-      <div class="g2">
-        <div><label for="lage">AGE</label><input class="f" id="lage" type="number" min="5" max="80" required placeholder="15"></div>
-        <div id="clsBox"><label for="lcls">CLASS</label><select class="f" id="lcls"></select></div>
-        <div id="subBox" class="hidden"><label for="lsub">SUBJECT / EDUCATION</label><input class="f" id="lsub" maxlength="40" placeholder="Maths, M.Sc."></div>
-      </div>
-      <button class="pri" style="width:100%;margin-top:20px" type="submit">Log in →</button>
-      <p class="sub" style="margin:12px 0 0">Demo login: no password. Students open the Student view, teachers open the Teacher view.</p>
+  <div class="blob" style="width:220px;height:220px;top:-60px;left:-60px"></div><div class="blob" style="width:140px;height:140px;bottom:10%;left:40%;animation-delay:2s"></div>
+  <div class="lh"><div class="logo">🏫</div><h1>SchoolSync</h1>
+    <p>Your school, in sync. Notices, homework, files, private chats and class groups in one place.</p>
+    <div class="pills"><span>📅 Scheduled posts</span><span>🔔 Personal alerts</span><span>💬 Private chat</span><span>👥 Class groups</span></div></div>
+  <div class="lc"><div class="lbox">
+    <div class="at"><button class="on" id="tl">Log in</button><button id="ts">Sign up</button></div>
+    <form id="lf">
+      <div class="seg"><label><input type="radio" name="lr" value="student" checked>🎓 Student</label><label><input type="radio" name="lr" value="teacher">👩‍🏫 Teacher</label></div>
+      <label for="ln">NAME</label><input class="f" id="ln" required maxlength="40" autocomplete="username">
+      <label for="lp">PASSWORD</label><input class="f" id="lp" type="password" required autocomplete="current-password">
+      <div id="lcB" class="hidden"><label for="lc">TEACHER CODE</label><input class="f" id="lc" type="password" inputmode="numeric" placeholder="Enter teacher code"></div>
+      <button class="pri" style="width:100%;margin-top:20px">Log in →</button>
     </form>
-  </div>
+    <form id="sf" class="hidden">
+      <div class="seg"><label><input type="radio" name="sr" value="student" checked>🎓 Student</label><label><input type="radio" name="sr" value="teacher">👩‍🏫 Teacher</label></div>
+      <label for="sn">FULL NAME</label><input class="f" id="sn" required maxlength="40">
+      <div class="g2"><div><label for="sp">PASSWORD</label><input class="f" id="sp" type="password" required minlength="4" autocomplete="new-password"></div>
+      <div><label for="sa">AGE</label><input class="f" id="sa" type="number" min="5" max="80" required></div></div>
+      <div id="scB"><label for="sc">CLASS</label><select class="f" id="sc"></select></div>
+      <div id="ssB" class="hidden"><label for="ss">SUBJECT / EDUCATION</label><input class="f" id="ss" maxlength="40" placeholder="e.g. Maths, M.Sc."></div>
+      <div id="sdB" class="hidden"><label for="sd">TEACHER CODE</label><input class="f" id="sd" type="password" inputmode="numeric"></div>
+      <label for="spf">PROFILE PICTURE (OPTIONAL)</label><input class="f" id="spf" type="file" accept="image/*"><div class="sub" id="spt"></div>
+      <button class="pri" style="width:100%;margin-top:18px">Create account →</button>
+    </form>
+  </div></div>
 </div>
 
 <div id="app" class="hidden">
-  <header>
-    <div class="brand">🏫 SchoolSync</div>
-    <div class="hr"><span class="chip" id="who"></span><button class="bell hidden" id="bell" title="Personal messages">🔔<b id="bellN">0</b></button><button class="ghost" id="out">Log out</button></div>
-  </header>
-  <main class="wrap">
-    <div class="stats" id="stats"></div>
-    <div class="tabs" id="tabs"></div>
+  <header><div class="brand">🏫 SchoolSync</div>
+    <div class="hr"><button class="bell hidden" id="bell" title="Personal messages">🔔<b id="bellN">0</b></button><span class="chip" id="who" title="Click to change your picture"></span><input type="file" id="hpic" accept="image/*" class="hidden"><button class="ghost" id="out">Log out</button></div></header>
+  <main class="wrap" id="main">
+    <div class="stats" id="stats"></div><div class="tabs" id="tabs"></div>
 
-    <section id="tpub" class="panel hidden">
-      <h3>✍️ Create an Update</h3><div class="sub">Post to everyone, a class, or one student. Choose when it appears and when it auto-deletes.</div>
-      <form id="pf">
-        <div class="g2">
-          <div><label for="ptype">TYPE</label><select class="f" id="ptype"><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select></div>
-          <div><label for="paud">SEND TO</label><select class="f" id="paud"></select></div>
-        </div>
-        <label for="ptitle">TITLE</label><input class="f" id="ptitle" maxlength="100" required placeholder="e.g. Maths assignment due Monday">
-        <label for="pdet">DETAILS</label><textarea class="f" id="pdet" maxlength="1500" required placeholder="Instructions, dates, other details..."></textarea>
-        <div class="g2">
-          <div><label for="pfrom">SHOW FROM</label><input class="f" type="datetime-local" id="pfrom" required></div>
-          <div><label for="pto">SHOW UNTIL (then auto-deleted)</label><input class="f" type="datetime-local" id="pto" required></div>
-        </div>
-        <div class="row"><button class="pri" type="submit">＋ Publish</button><button class="ghost" type="reset" id="prst">Clear</button></div>
-      </form>
-    </section>
+    <section id="tpub" class="panel hidden"><h3>✍️ Create an Update</h3><div class="sub">Send to everyone, a class, a group, or one student. Set when it shows and when it auto-deletes.</div>
+      <form id="pf"><div class="g2"><div><label for="ptype">TYPE</label><select class="f" id="ptype"><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select></div>
+      <div><label for="paud">SEND TO</label><select class="f" id="paud"></select></div></div>
+      <label for="ptitle">TITLE</label><input class="f" id="ptitle" maxlength="100" required>
+      <label for="pdet">DETAILS</label><textarea class="f" id="pdet" maxlength="2000" required></textarea>
+      <label for="pfile">ATTACH A FILE / PDF (MAX 1 MB)</label><input class="f" id="pfile" type="file" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx">
+      <div class="g2"><div><label for="pfrom">SHOW FROM</label><input class="f" type="datetime-local" id="pfrom" required></div><div><label for="pto">SHOW UNTIL (then auto-deleted)</label><input class="f" type="datetime-local" id="pto" required></div></div>
+      <div class="row"><button class="pri">＋ Publish</button><button class="ghost" type="reset" id="prst">Clear</button></div></form></section>
 
-    <section id="tman" class="panel hidden">
-      <h3>📋 Manage Updates</h3><div class="sub">Expired updates are removed automatically.</div>
-      <div class="tools"><input class="f" id="tq" placeholder="Search..."><select class="f" id="tf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="tw"><option value="">All teachers</option><option value="me">Only mine</option></select></div>
-      <div id="tfeed"></div>
-    </section>
+    <section id="tman" class="panel hidden"><h3>📋 Manage Updates</h3><div class="sub">Click any update to open it. Expired updates are removed automatically.</div>
+      <div class="tools"><input class="f" id="tq" placeholder="Search..."><select class="f" id="tf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="tw"><option value="">All teachers</option><option value="me">Only mine</option></select></div><div id="tfeed"></div></section>
 
-    <section id="tcmp" class="panel hidden"><h3>🗣️ Student Complaints</h3><div class="sub">Anonymous complaints hide the student's name from everyone.</div><div id="tcl"></div></section>
+    <section id="tstu" class="panel hidden"><h3>🎓 Students</h3><div class="sub">Everyone who has signed up, by class.</div><div class="tools"><select class="f" id="stc"></select></div><div id="slist"></div></section>
+    <section id="tcmp" class="panel hidden"><h3>🗣️ Student Complaints</h3><div class="sub">Anonymous complaints hide the student's name.</div><div id="tcl"></div></section>
 
-    <section id="sbrd" class="panel hidden">
-      <h3>📚 Noticeboard</h3><div class="sub">Every update shows which teacher posted it. Personal messages are highlighted.</div>
-      <div class="tools"><input class="f" id="sq" placeholder="Search..."><select class="f" id="sf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="st2"><option value="">All teachers</option></select><select class="f" id="sp"><option value="">Everything</option><option value="p">Personal only</option></select></div>
-      <div id="sfeed"></div>
-    </section>
+    <section id="sbrd" class="panel hidden"><h3 id="sbt">📚 Noticeboard</h3><div class="sub">Click any update for full details. Click 🔔 to see only personal messages, and again to go back.</div>
+      <div class="tools"><input class="f" id="sq" placeholder="Search..."><select class="f" id="sf"><option value="">All types</option><option>Important Notice</option><option>Homework</option><option>Study Material</option><option>Event</option></select><select class="f" id="st2"></select></div><div id="sfeed"></div></section>
 
-    <section id="scmp" class="hidden">
-      <div class="panel">
-        <h3>📝 Submit a Complaint</h3><div class="sub">Choose who can see it and whether your name is shown.</div>
-        <form id="cf">
-          <label for="ctext">YOUR COMPLAINT</label><textarea class="f" id="ctext" maxlength="1000" required placeholder="Describe the issue..."></textarea>
-          <div class="g2">
-            <div><label for="cvis">VISIBILITY</label><select class="f" id="cvis"><option value="public">🌍 Public (all students & teachers)</option><option value="private">🔒 Private (teachers only)</option></select></div>
-            <div><label>&nbsp;</label><label class="chk"><input type="checkbox" id="canon"> Hide my name (anonymous)</label></div>
-          </div>
-          <div class="row"><button class="pri" type="submit">Submit complaint</button></div>
-        </form>
-      </div>
-      <div class="panel" style="margin-top:16px"><h3>Complaints</h3><div class="sub">Public complaints plus your own private ones.</div><div id="scl"></div></div>
-    </section>
+    <section id="scmp" class="hidden"><div class="panel"><h3>📝 Submit a Complaint</h3>
+      <form id="cf"><label for="ctext">YOUR COMPLAINT</label><textarea class="f" id="ctext" maxlength="1000" required></textarea>
+      <div class="g2"><div><label for="cvis">VISIBILITY</label><select class="f" id="cvis"><option value="public">🌍 Public</option><option value="private">🔒 Private (teachers only)</option></select></div><div><label>&nbsp;</label><label class="chk"><input type="checkbox" id="canon"> Hide my name</label></div></div>
+      <div class="row"><button class="pri">Submit</button></div></form></div>
+      <div class="panel" style="margin-top:16px"><h3>Complaints</h3><div class="sub">Public ones plus your own private ones.</div><div id="scl"></div></div></section>
+
+    <section id="chat" class="hidden"><div class="cg"><div class="panel"><h3>💬 Chats</h3><div id="clist"></div><div id="cnew"></div></div>
+      <div class="panel"><div id="chead"><div class="empty">Select a chat to start talking.</div></div><div id="msgs" class="hidden"></div>
+      <form id="mf" class="row hidden"><select class="f hidden" id="cto" style="max-width:190px"></select><input class="f" id="mt" placeholder="Type a message..." maxlength="500" autocomplete="off" required style="flex:1"><button class="pri">Send</button></form></div></div>
+      <div id="gform" class="panel hidden" style="margin-top:16px"><h3>👥 New Group</h3><label for="gn">GROUP NAME</label><input class="f" id="gn" maxlength="40" placeholder="e.g. Class 10 Maths, Science Club">
+        <label for="gcls">QUICK ADD A WHOLE CLASS</label><select class="f" id="gcls"></select><label>MEMBERS</label><div id="gmem"></div>
+        <div class="row"><button class="pri" id="gmk" type="button">Create group</button><button class="ghost" id="gcx" type="button">Cancel</button></div></div></section>
   </main>
 </div>
-<div id="toast" class="hidden" role="status"></div>
+<div id="md" class="hidden"></div><div id="toast" class="hidden" role="status"></div>
 
 <script>
-const K={u:"ss3_users",p:"ss3_posts",c:"ss3_comps",s:"ss3_sess",r:"ss3_read"};
+const K={u:"ss4u",p:"ss4p",c:"ss4c",s:"ss4s",r:"ss4r",g:"ss4g",m:"ss4m"},CODE="6191";
 const CLASSES=["Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"];
-const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id),H=36e5,D=24*H,now=()=>Date.now();
 const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}};
-const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{toast("Storage unavailable: changes won't persist.")}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{toast("Storage full or unavailable: this may not be saved.")}};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const H=36e5,D=24*H,now=()=>Date.now();
 const loc=t=>new Date(t-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
 const fmt=t=>new Date(t).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
-const seed={
- users:[{id:"t1",name:"Ms. Sharma",role:"teacher",age:34,sub:"Mathematics"},{id:"t2",name:"Mr. Verma",role:"teacher",age:41,sub:"Physics"},{id:"s1",name:"Aarav",role:"student",age:15,cls:"Class 10"},{id:"s2",name:"Meera",role:"student",age:14,cls:"Class 9"}],
- posts:[{id:"p1",type:"Important Notice",aud:"all",title:"Science Test on Friday",det:"Covers Chapters 1 and 2. Revise your notes and bring stationery.",from:now()-H,to:now()+5*D,by:"t2"},
-  {id:"p2",type:"Homework",aud:"Class 10",title:"Mathematics Practice",det:"Complete questions 1–20 from the worksheet.",from:now()-2*H,to:now()+3*D,by:"t1"},
-  {id:"p3",type:"Important Notice",aud:"u:s1",title:"Please meet me after class",det:"Aarav, please see me after 3rd period about your project.",from:now()-H/2,to:now()+2*D,by:"t1"}]};
-let users=ld(K.u,null)||seed.users,posts=ld(K.p,null)||seed.posts,comps=ld(K.c,[]),reads=ld(K.r,{}),me=null,tab="",tmr;
-const uById=id=>users.find(u=>u.id===id);
-const audLabel=a=>a==="all"?"All students":a.startsWith("u:")?"🔒 "+(uById(a.slice(2))?.name||"Student"):a;
-const isMine=p=>me&&me.role==="student"&&(p.aud==="all"||p.aud===me.cls||p.aud==="u:"+me.id);
-const isPers=p=>p.aud.startsWith("u:");
-const live=p=>p.from<=now()&&p.to>now();
-const unread=()=>posts.filter(p=>live(p)&&p.aud==="u:"+me.id&&!(reads[me.id]||[]).includes(p.id));
+let users=ld(K.u,[]),posts=ld(K.p,[]),comps=ld(K.c,[]),reads=ld(K.r,{}),groups=ld(K.g,[]),msgs=ld(K.m,[]),me=null,tab="",pers=false,room=null,tmr,ckey="",spic=null;
+const uBy=id=>users.find(u=>u.id===id),gBy=id=>groups.find(g=>g.id===id);
+const students=()=>users.filter(u=>u.role==="student"),teachers=()=>users.filter(u=>u.role==="teacher");
+function toast(m){const t=$("toast");t.textContent=m;t.classList.remove("hidden");t.style.animation="none";t.offsetWidth;t.style.animation="";clearTimeout(tmr);tmr=setTimeout(()=>t.classList.add("hidden"),3200)}
+function av(u,s=34){const z=`width:${s}px;height:${s}px`;if(!u)return`<span class="av" style="${z}">👥</span>`;return u.pic?`<img class="av" style="${z}" src="${esc(u.pic)}" alt="">`:`<span class="av" style="${z};font-size:${s*.45}px">${esc(u.name[0].toUpperCase())}</span>`}
+function resize(f,cb){const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const c=document.createElement("canvas");c.width=c.height=96;const m=Math.min(i.width,i.height);c.getContext("2d").drawImage(i,(i.width-m)/2,(i.height-m)/2,m,m,0,0,96,96);cb(c.toDataURL("image/jpeg",.8))};i.src=r.result};r.readAsDataURL(f)}
+const saveU=()=>sv(K.u,users);
 
-function toast(m){const t=$("toast");t.textContent=m;t.classList.remove("hidden");clearTimeout(tmr);tmr=setTimeout(()=>t.classList.add("hidden"),3000)}
-function purge(){const n=posts.length;posts=posts.filter(p=>p.to>now());if(posts.length!==n){sv(K.p,posts);return true}return false}
-function saveAll(){sv(K.u,users);sv(K.p,posts);sv(K.c,comps);sv(K.r,reads)}
+/* ---------- auth ---------- */
+const rs=n=>document.querySelector(`[name=${n}]:checked`).value;
+$("sc").innerHTML=$("gcls").innerHTML=CLASSES.map(c=>`<option>${c}</option>`).join("");
+document.querySelectorAll("[name=lr],[name=sr]").forEach(r=>r.onchange=()=>{
+ $("lcB").classList.toggle("hidden",rs("lr")!=="teacher");const t=rs("sr")==="teacher";
+ $("scB").classList.toggle("hidden",t);$("ssB").classList.toggle("hidden",!t);$("sdB").classList.toggle("hidden",!t)});
+$("tl").onclick=$("ts").onclick=e=>{const l=e.target.id==="tl";$("tl").classList.toggle("on",l);$("ts").classList.toggle("on",!l);$("lf").classList.toggle("hidden",!l);$("sf").classList.toggle("hidden",l)};
+$("spf").onchange=e=>{const f=e.target.files[0];if(f)resize(f,d=>{spic=d;$("spt").textContent="✓ Photo added"})};
+$("lf").onsubmit=e=>{e.preventDefault();const role=rs("lr"),n=$("ln").value.trim().toLowerCase();
+ if(role==="teacher"&&$("lc").value!==CODE)return toast("❌ Wrong teacher code.");
+ const u=users.find(x=>x.role===role&&x.name.toLowerCase()===n);
+ if(!u||u.pw!==$("lp").value)return toast("❌ Wrong name or password. New here? Use Sign up.");
+ start(u)};
+$("sf").onsubmit=e=>{e.preventDefault();const role=rs("sr"),name=$("sn").value.trim();
+ if(role==="teacher"&&$("sd").value!==CODE)return toast("❌ Wrong teacher code.");
+ if(role==="teacher"&&!$("ss").value.trim())return toast("Please enter your subject or education.");
+ if(users.some(x=>x.role===role&&x.name.toLowerCase()===name.toLowerCase()))return toast("That name is already registered. Please log in.");
+ const u={id:(role==="teacher"?"t":"s")+now().toString(36)+Math.random().toString(16).slice(2,4),name,pw:$("sp").value,role,age:+$("sa").value,pic:spic};
+ if(role==="student")u.cls=$("sc").value;else u.sub=$("ss").value.trim();
+ users.push(u);saveU();spic=null;e.target.reset();$("spt").textContent="";start(u);toast("🎉 Account created. Welcome!")};
+$("out").onclick=()=>{try{localStorage.removeItem(K.s)}catch{}me=null;pers=false;room=null;$("app").classList.add("hidden");$("login").classList.remove("hidden")};
+$("who").onclick=()=>$("hpic").click();
+$("hpic").onchange=e=>{const f=e.target.files[0];if(f)resize(f,d=>{me.pic=d;saveU();hdr();render();toast("Picture updated.")})};
+function hdr(){$("who").innerHTML=av(me,28)+`<span>${esc(me.name)} • ${esc(me.role==="teacher"?me.sub:me.cls)} • ${me.age}</span>`}
 
-$("lcls").innerHTML=CLASSES.map(c=>`<option>${c}</option>`).join("");
-document.querySelectorAll('[name=role]').forEach(r=>r.onchange=()=>{const t=r.value==="teacher"&&r.checked;$("clsBox").classList.toggle("hidden",t);$("subBox").classList.toggle("hidden",!t)});
-$("loginForm").onsubmit=e=>{e.preventDefault();
- const role=document.querySelector('[name=role]:checked').value,name=$("lname").value.trim(),age=+$("lage").value;
- let u=users.find(x=>x.role===role&&x.name.toLowerCase()===name.toLowerCase());
- if(!u){u={id:(role==="teacher"?"t":"s")+now().toString(36),name,role};users.push(u)}
- u.age=age;if(role==="student")u.cls=$("lcls").value;else u.sub=$("lsub").value.trim()||"Teacher";
- saveAll();sv(K.s,u.id);start(u)};
-$("out").onclick=()=>{try{localStorage.removeItem(K.s)}catch{}me=null;$("app").classList.add("hidden");$("login").classList.remove("hidden")};
-
-function start(u){me=u;$("login").classList.add("hidden");$("app").classList.remove("hidden");
- const t=u.role==="teacher";
- $("who").textContent=(t?"👩‍🏫 ":"🎓 ")+u.name+" • "+(t?u.sub:u.cls)+" • Age "+u.age;
- $("bell").classList.toggle("hidden",t);
- const tabs=t?[["tpub","✍️ Publish"],["tman","📋 Updates"],["tcmp","🗣️ Complaints"]]:[["sbrd","📚 Noticeboard"],["scmp","📝 Complaints"]];
- $("tabs").innerHTML=tabs.map(x=>`<button data-tab="${x[0]}">${x[1]}</button>`).join("");
- fillAud();$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D);
- setTab(tabs[0][0]);purge();render();
+function start(u){me=u;u.last=now();saveU();sv(K.s,u.id);pers=false;room=null;
+ $("login").classList.add("hidden");$("app").classList.remove("hidden");const t=u.role==="teacher";hdr();$("bell").classList.toggle("hidden",t);
+ const tb=t?[["tpub","✍️ Publish"],["tman","📋 Updates"],["tstu","🎓 Students"],["chat","💬 Chats"],["tcmp","🗣️ Complaints"]]:[["sbrd","📚 Noticeboard"],["chat","💬 Chats"],["scmp","📝 Complaints"]];
+ $("tabs").innerHTML=tb.map(x=>`<button data-tab="${x[0]}">${x[1]}</button>`).join("");
+ $("stc").innerHTML='<option value="">All classes</option>'+CLASSES.map(c=>`<option>${c}</option>`).join("");
+ $("pfrom").value=loc(now());$("pto").value=loc(now()+7*D);setTab(tb[0][0]);
  if(!t){const n=unread().length;if(n)toast(`🔔 You have ${n} new personal message${n>1?"s":""}!`)}}
 $("tabs").onclick=e=>{const b=e.target.closest("[data-tab]");if(b)setTab(b.dataset.tab)};
-function setTab(t){tab=t;["tpub","tman","tcmp","sbrd","scmp"].forEach(id=>$(id).classList.toggle("hidden",id!==t));
- document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t))}
-$("bell").onclick=()=>{setTab("sbrd");$("sp").value="p";render()};
+function setTab(t){tab=t;["tpub","tman","tstu","tcmp","sbrd","scmp","chat"].forEach(id=>$(id).classList.toggle("hidden",id!==t));
+ document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
+ const m=$("main");m.classList.add("anim");setTimeout(()=>m.classList.remove("anim"),900);document.querySelectorAll(".post,.st,.stu").forEach((el,i)=>el.style.setProperty("--i",i%12));render(true)}
+$("bell").onclick=()=>{pers=!pers;if(tab!=="sbrd")setTab("sbrd");else render();toast(pers?"🔔 Showing personal messages. Click again to see everything.":"Showing all updates.")};
 
-function fillAud(){$("paud").innerHTML='<option value="all">All students</option>'+CLASSES.map(c=>`<option>${c}</option>`).join("")+
- '<optgroup label="Single student (personal alert)">'+users.filter(u=>u.role==="student").map(u=>`<option value="u:${u.id}">${esc(u.name)} (${esc(u.cls||"")})</option>`).join("")+"</optgroup>"}
-$("pf").onsubmit=e=>{e.preventDefault();
- const from=new Date($("pfrom").value).getTime(),to=new Date($("pto").value).getTime();
- if(!(to>from)||to<=now()){toast("“Show until” must be after “Show from” and in the future.");return}
- posts.unshift({id:"p"+now().toString(36)+Math.random().toString(16).slice(2,5),type:$("ptype").value,aud:$("paud").value,title:$("ptitle").value.trim(),det:$("pdet").value.trim(),from,to,by:me.id});
- sv(K.p,posts);e.target.reset();$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D);render();
- toast(from>now()?"Scheduled! It will appear automatically.":"Published!");setTab("tman")};
-$("prst").onclick=()=>setTimeout(()=>{$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D)});
-
-function postCard(p,teacher){
- const by=uById(p.by),status=!live(p)?"⏳ Scheduled":"🟢 Live",seen=isPers(p)?((reads[p.aud.slice(2)]||[]).includes(p.id)?"✓ Seen":"Not seen yet"):"";
- return `<article class="post ${isPers(p)?"pers":""}"><div class="ph"><div><span class="bd ${p.type.split(" ")[1]||p.type}">${esc(p.type)}</span>${isPers(p)?'<span class="bd pv">🔔 Personal</span>':""}<h4>${esc(p.title)}</h4></div>
- ${teacher&&p.by===me.id?`<button class="dng" data-del="${p.id}">Delete</button>`:""}${!teacher&&isPers(p)&&!(reads[me.id]||[]).includes(p.id)?`<button class="ok" data-read="${p.id}">Got it ✓</button>`:""}</div>
- <p>${esc(p.det)}</p><div class="meta">👩‍🏫 ${esc(by?by.name+" ("+(by.sub||"Teacher")+")":"Teacher")} • 👥 ${esc(audLabel(p.aud))}<br>
- 🕒 Shows ${fmt(p.from)} → auto-deletes ${fmt(p.to)}${teacher?" • "+status+(seen?" • "+seen:""):""}</div></article>`}
+/* ---------- posts ---------- */
+const live=p=>p.from<=now()&&p.to>now();
+const inG=(g,id)=>g&&g.members.includes(id);
+const forMe=p=>p.aud==="all"||p.aud===me.cls||p.aud==="u:"+me.id||(p.aud[0]==="g"&&inG(gBy(p.aud),me.id));
+const isP=p=>p.aud.startsWith("u:");
+const unread=()=>posts.filter(p=>live(p)&&p.aud==="u:"+me.id&&!(reads[me.id]||[]).includes(p.id));
+function purge(){const n=posts.length;posts=posts.filter(p=>p.to>now());if(n!==posts.length)sv(K.p,posts)}
+const audL=a=>a==="all"?"All students":a.startsWith("u:")?"🔒 "+(uBy(a.slice(2))?.name||"Student"):a[0]==="g"?"👥 "+(gBy(a)?.name||"Group"):a;
+function fillAud(){const ss=students().sort((a,b)=>a.cls.localeCompare(b.cls)||a.name.localeCompare(b.name));
+ const h='<option value="all">All students</option>'+CLASSES.map(c=>`<option>${c}</option>`).join("")+
+ (groups.length?'<optgroup label="Groups">'+groups.filter(g=>inG(g,me.id)).map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join("")+"</optgroup>":"")+
+ '<optgroup label="One student (personal alert)">'+(ss.length?ss.map(u=>`<option value="u:${u.id}">${esc(u.name)} (${esc(u.cls)})</option>`).join(""):'<option disabled>No students signed up yet</option>')+"</optgroup>";
+ const s=$("paud");if(s.dataset.h!==h){const c=s.value;s.innerHTML=h;s.dataset.h=h;if(c)s.value=c}}
+function readF(f,cb){if(!f)return cb(null);if(f.size>1048576){toast("File is over 1 MB.");return}const r=new FileReader();r.onload=()=>cb({name:f.name,type:f.type,data:r.result});r.readAsDataURL(f)}
+const rst=()=>{$("pfrom").value=loc(now());$("pto").value=loc(now()+7*D)};
+$("pf").onsubmit=e=>{e.preventDefault();const from=new Date($("pfrom").value).getTime(),to=new Date($("pto").value).getTime();
+ if(!(to>from)||to<=now())return toast("“Show until” must be after “Show from” and in the future.");
+ readF($("pfile").files[0],file=>{posts.unshift({id:"p"+now().toString(36)+Math.random().toString(16).slice(2,5),type:$("ptype").value,aud:$("paud").value,title:$("ptitle").value.trim(),det:$("pdet").value.trim(),from,to,by:me.id,file});
+  sv(K.p,posts);$("pf").reset();rst();toast(from>now()?"📅 Scheduled. It will appear automatically.":"✅ Published!");setTab("tman")})};
+$("prst").onclick=()=>setTimeout(rst);
+const tcls=t=>t.split(" ")[1]||t;
+function card(p,t){const by=uBy(p.by),rd=isP(p)?((reads[p.aud.slice(2)]||[]).includes(p.id)?" • ✓ Seen":" • Not seen yet"):"";
+ return`<article class="post ${isP(p)?"pers":""}" data-open="${p.id}"><div class="ph"><div><span class="bd ${tcls(p.type)}">${esc(p.type)}</span>${isP(p)?'<span class="bd pv">🔔 Personal</span>':""}${p.file?'<span class="bd">📎 File</span>':""}<h4>${esc(p.title)}</h4></div>
+ ${t&&p.by===me.id?`<button class="dng" data-del="${p.id}">Delete</button>`:""}</div><p>${esc(p.det)}</p>
+ <div class="meta">${by?av(by,18):""} ${esc(by?by.name+" ("+by.sub+")":"Teacher")} • 👥 ${esc(audL(p.aud))}<br>🕒 ${fmt(p.from)} → auto-deletes ${fmt(p.to)}${t?(live(p)?" • 🟢 Live":" • ⏳ Scheduled")+rd:""}</div></article>`}
+function openPost(id){const p=posts.find(x=>x.id===id);if(!p)return;const by=uBy(p.by);
+ if(me.role==="student"&&p.aud==="u:"+me.id&&!(reads[me.id]||[]).includes(p.id)){(reads[me.id]=reads[me.id]||[]).push(p.id);sv(K.r,reads);render()}
+ let f="";if(p.file){const img=p.file.type.startsWith("image/"),pdf=p.file.type==="application/pdf";
+  f=`<div class="meta">📎 ${esc(p.file.name)}</div>`+(img?`<img class="pv" src="${esc(p.file.data)}" alt="">`:pdf?`<iframe src="${esc(p.file.data)}" title="PDF"></iframe>`:"")+`<div class="row"><a href="${esc(p.file.data)}" download="${esc(p.file.name)}"><button class="pri" type="button">⬇ Download file</button></a></div>`}
+ $("md").innerHTML=`<div class="mb"><div class="ph"><div><span class="bd ${tcls(p.type)}">${esc(p.type)}</span>${isP(p)?'<span class="bd pv">🔔 Personal</span>':""}</div><button class="ghost" data-x>✕</button></div>
+ <h2>${esc(p.title)}</h2><div class="txt">${esc(p.det)}</div>${f}
+ <div class="meta" style="margin-top:16px">${by?av(by,22):""} Posted by <b>${esc(by?by.name:"Teacher")}</b> (${esc(by?by.sub:"")})<br>👥 To: ${esc(audL(p.aud))}<br>🕒 Visible ${fmt(p.from)} → ${fmt(p.to)} (then auto-deleted)</div></div>`;
+ $("md").classList.remove("hidden")}
+$("md").onclick=e=>{if(e.target===$("md")||e.target.closest("[data-x]"))$("md").classList.add("hidden")};
 const empty='<div class="empty"><strong>Nothing here yet.</strong><br>Try changing the filters.</div>';
-const match=(p,q,t)=>(!t||p.type===t)&&`${p.title} ${p.det} ${p.type}`.toLowerCase().includes(q.toLowerCase().trim());
+const mt=(p,q,t)=>(!t||p.type===t)&&`${p.title} ${p.det}`.toLowerCase().includes(q.toLowerCase().trim());
 
-function render(){
- if(!me)return;purge();const t=me.role==="teacher";
- const vis=t?posts:posts.filter(p=>live(p)&&isMine(p));
- const c=x=>vis.filter(p=>p.type===x).length;
- const cl=comps.filter(x=>t||x.pub||x.uid===me.id);
- $("stats").innerHTML=[["📣 Updates",vis.length],["🔔 Notices",c("Important Notice")],["📝 Homework",c("Homework")],[t?"🗣️ Complaints":"🔔 Unread personal",t?comps.filter(x=>!x.done).length:unread().length]].map(s=>`<div class="st"><small>${s[0]}</small><b>${s[1]}</b></div>`).join("");
- if(t){
-  let l=posts.filter(p=>match(p,$("tq").value,$("tf").value)&&($("tw").value!=="me"||p.by===me.id));
-  $("tfeed").innerHTML=l.length?l.map(p=>postCard(p,true)).join(""):empty;
-  $("tcl").innerHTML=cl.length?cl.map(x=>compCard(x,true)).join(""):empty;
+/* ---------- complaints ---------- */
+function ccard(x,t){const own=!t&&x.uid===me.id;
+ return`<article class="post" style="cursor:default"><div class="ph"><div><span class="bd">${x.pub?"🌍 Public":"🔒 Private"}</span>${x.anon?'<span class="bd an">🕶️ Anonymous</span>':""}${x.done?'<span class="bd Study">✔ Resolved</span>':""}</div>
+ <div class="row" style="margin:0">${t?`<button class="ok" data-res="${x.id}">${x.done?"Reopen":"Resolve"}</button>`:""}${own?`<button class="dng" data-cdel="${x.id}">Delete</button>`:""}</div></div>
+ <p style="margin-top:10px;-webkit-line-clamp:unset">${esc(x.text)}</p><div class="meta">👤 ${esc(x.anon?"Anonymous":x.name)}${own&&x.anon?" (only you know)":""} • 🕒 ${fmt(x.time)}</div></article>`}
+$("cf").onsubmit=e=>{e.preventDefault();comps.unshift({id:"c"+now().toString(36),text:$("ctext").value.trim(),pub:$("cvis").value==="public",anon:$("canon").checked,uid:me.id,name:me.name,time:now(),done:false});sv(K.c,comps);e.target.reset();render();toast("Complaint submitted.")};
+
+/* ---------- chat ---------- */
+const dm=(a,b)=>"d:"+[a,b].sort().join("_"),dmIds=r=>r.slice(2).split("_");
+function canSee(m){if(m.room[0]==="d")return dmIds(m.room).includes(me.id);const g=gBy(m.room.slice(2));return inG(g,me.id)&&(!m.to||m.to===me.id||m.from===me.id)}
+function convs(){const L=[];
+ if(me.role==="student")teachers().forEach(t=>L.push({id:dm(me.id,t.id),t:"Talk to "+t.name,s:t.sub,u:t,h:"💬 Teachers"}));
+ else{const o=new Set();msgs.forEach(m=>{if(m.room[0]==="d"&&dmIds(m.room).includes(me.id))o.add(m.room)});if(room&&room[0]==="d"&&dmIds(room).includes(me.id))o.add(room);
+  o.forEach(r=>{const u=uBy(dmIds(r).find(i=>i!==me.id));if(u)L.push({id:r,t:u.name,s:u.cls,u,h:"💬 Private chats"})})}
+ groups.filter(g=>inG(g,me.id)).forEach(g=>L.push({id:"g:"+g.id,t:g.name,s:g.members.length+" members",u:null,h:"👥 Groups"}));return L}
+function renderChat(force){const L=convs();let h="",last="";
+ L.forEach(c=>{if(c.h!==last){h+=`<div class="sub" style="margin-top:12px;font-weight:800">${c.h}</div>`;last=c.h}h+=`<button class="cv ${c.id===room?"on":""}" data-room="${c.id}">${av(c.u,34)}<span>${esc(c.t)}<small>${esc(c.s||"")}</small></span></button>`});
+ $("clist").innerHTML=h||'<div class="empty">No chats yet.'+(me.role==="teacher"?" Open the Students tab to message a student, or create a group.":" No teachers have signed up yet.")+"</div>";
+ $("cnew").innerHTML=me.role==="teacher"?'<button class="pri" style="width:100%;margin-top:14px" data-newg>＋ New group</button>':"";
+ const key=room+"|"+msgs.length;if(!force&&key===ckey)return;ckey=key;
+ const ok=room&&L.some(c=>c.id===room);$("msgs").classList.toggle("hidden",!ok);$("mf").classList.toggle("hidden",!ok);
+ if(!ok){$("chead").innerHTML='<div class="empty">Select a chat to start talking.</div>';return}
+ const c=L.find(c=>c.id===room),g=room[0]==="g"?gBy(room.slice(2)):null;
+ $("chead").innerHTML=`<div class="row" style="margin:0;justify-content:space-between"><div class="row" style="margin:0">${av(c.u,40)}<div><strong>${esc(c.t)}</strong><div class="sub">${g?"👥 "+g.members.map(i=>uBy(i)?.name).filter(Boolean).map(esc).join(", "):"🔒 Private: only you two can see this"}</div></div></div>${g&&g.by===me.id?`<button class="dng" data-gdel="${g.id}">Delete group</button>`:""}</div>`;
+ const cto=$("cto");cto.classList.toggle("hidden",!g);if(g&&cto.dataset.r!==room){cto.dataset.r=room;cto.innerHTML='<option value="">👥 Everyone in group</option>'+g.members.filter(i=>i!==me.id&&uBy(i)).map(i=>`<option value="${i}">🔒 Only ${esc(uBy(i).name)}</option>`).join("")}
+ const ms=msgs.filter(m=>m.room===room&&canSee(m));
+ $("msgs").innerHTML=ms.map(m=>{const u=uBy(m.from),mine=m.from===me.id;return`<div class="b ${mine?"me":""}"><small>${mine?"You":esc(u?u.name:"?")}${m.to?" 🔒 private to "+esc(m.from===me.id?uBy(m.to)?.name||"":"you"):""} • ${fmt(m.time)}</small>${esc(m.text)}</div>`}).join("")||'<div class="empty">No messages yet. Say hello 👋</div>';
+ $("msgs").scrollTop=$("msgs").scrollHeight}
+$("mf").onsubmit=e=>{e.preventDefault();const t=$("mt").value.trim();if(!t||!room)return;const m={id:"m"+now().toString(36)+Math.random().toString(16).slice(2,4),room,from:me.id,text:t,time:now()};
+ if(room[0]==="g"&&$("cto").value)m.to=$("cto").value;msgs.push(m);sv(K.m,msgs);$("mt").value="";renderChat()};
+$("gcls").onchange=()=>document.querySelectorAll("[name=gm]").forEach(c=>{if(uBy(c.value).cls===$("gcls").value)c.checked=true});
+function gform(){$("gmem").innerHTML=students().map(u=>`<label class="chk"><input type="checkbox" name="gm" value="${u.id}">${av(u,22)} ${esc(u.name)} <span class="sub">(${esc(u.cls)})</span></label>`).join("")||'<div class="sub">No students have signed up yet.</div>';$("gform").classList.remove("hidden")}
+$("gcx").onclick=()=>$("gform").classList.add("hidden");
+$("gmk").onclick=()=>{const n=$("gn").value.trim(),mem=[...document.querySelectorAll("[name=gm]:checked")].map(c=>c.value);
+ if(!n||!mem.length)return toast("Add a group name and at least one student.");const g={id:"g"+now().toString(36),name:n,members:[...mem,me.id],by:me.id};groups.push(g);sv(K.g,groups);
+ $("gn").value="";$("gform").classList.add("hidden");room="g:"+g.id;toast("👥 Group created.");render(true)};
+
+/* ---------- render + events ---------- */
+function render(force){if(!me)return;purge();const t=me.role==="teacher";
+ const vis=t?posts:posts.filter(p=>live(p)&&forMe(p)),c=x=>vis.filter(p=>p.type===x).length;
+ const un=t?0:unread().length;
+ $("stats").innerHTML=(t?[["📣 Updates",vis.length],["🎓 Students",students().length],["👥 Groups",groups.filter(g=>inG(g,me.id)).length],["🗣️ Open complaints",comps.filter(x=>!x.done).length]]
+  :[["📣 Updates",vis.length],["📝 Homework",c("Homework")],["👥 My groups",groups.filter(g=>inG(g,me.id)).length],["🔔 Unread personal",un]]).map((s,i)=>`<div class="st" style="--i:${i}"><small>${s[0]}</small><b>${s[1]}</b></div>`).join("");
+ if(t){fillAud();$("tfeed").innerHTML=(l=>l.length?l.map(p=>card(p,true)).join(""):empty)(posts.filter(p=>mt(p,$("tq").value,$("tf").value)&&($("tw").value!=="me"||p.by===me.id)));
+  const w=$("tw");if(!w.dataset.d){w.dataset.d=1}
+  const ss=students().filter(u=>!$("stc").value||u.cls===$("stc").value).sort((a,b)=>CLASSES.indexOf(a.cls)-CLASSES.indexOf(b.cls)||a.name.localeCompare(b.name));let last="",h="";
+  ss.forEach(u=>{if(u.cls!==last){h+=(last?"</div>":"")+`<h4 style="margin:18px 0 0">${esc(u.cls)}</h4><div class="sg">`;last=u.cls}
+   h+=`<div class="stu">${av(u,46)}<div style="flex:1"><strong>${esc(u.name)}</strong><span class="sub">Age ${u.age} • last login ${u.last?fmt(u.last):"never"}</span></div><button class="ok" data-dm="${u.id}">💬</button></div>`});
+  $("slist").innerHTML=ss.length?h+"</div>":'<div class="empty">No students have signed up yet.</div>';
+  $("tcl").innerHTML=comps.length?comps.map(x=>ccard(x,true)).join(""):empty;
  }else{
-  const un=unread().length;$("bellN").textContent=un;$("bellN").classList.toggle("hidden",!un);
-  const sel=$("st2"),cur=sel.value,names=[...new Set(posts.filter(p=>live(p)&&isMine(p)).map(p=>p.by))];
-  sel.innerHTML='<option value="">All teachers</option>'+names.map(id=>`<option value="${id}">${esc(uById(id)?.name||"Teacher")}</option>`).join("");sel.value=names.includes(cur)?cur:"";
-  let l=vis.filter(p=>match(p,$("sq").value,$("sf").value)&&(!sel.value||p.by===sel.value)&&($("sp").value!=="p"||isPers(p)));
-  l.sort((a,b)=>isPers(b)-isPers(a)||b.from-a.from);
-  $("sfeed").innerHTML=l.length?l.map(p=>postCard(p,false)).join(""):empty;
-  $("scl").innerHTML=cl.length?cl.map(x=>compCard(x,false)).join(""):empty;
- }}
-function compCard(x,t){
- const who=x.anon?"Anonymous":(x.name||"Student"),own=!t&&x.uid===me.id;
- return `<article class="post"><div class="ph"><div><span class="bd">${x.pub?"🌍 Public":"🔒 Private"}</span>${x.anon?'<span class="bd an">🕶️ Anonymous</span>':""}${x.done?'<span class="bd Material">✔ Resolved</span>':""}</div>
- <div class="row" style="margin:0">${t?`<button class="ok" data-res="${x.id}">${x.done?"Reopen":"Mark resolved"}</button>`:""}${own?`<button class="dng" data-cdel="${x.id}">Delete</button>`:""}</div></div>
- <p style="margin-top:10px">${esc(x.text)}</p><div class="meta">👤 ${esc(who)}${own&&x.anon?" (only you know this is yours)":""} • 🕒 ${fmt(x.time)}</div></article>`}
-$("cf").onsubmit=e=>{e.preventDefault();
- comps.unshift({id:"c"+now().toString(36),text:$("ctext").value.trim(),pub:$("cvis").value==="public",anon:$("canon").checked,uid:me.id,name:me.name,time:now(),done:false});
- sv(K.c,comps);e.target.reset();render();toast("Complaint submitted.")};
-
-document.body.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
- if(d.del&&confirm("Delete this update?")){posts=posts.filter(p=>p.id!==d.del);sv(K.p,posts)}
- else if(d.read){(reads[me.id]=reads[me.id]||[]).push(d.read);sv(K.r,reads)}
- else if(d.res){const x=comps.find(c=>c.id===d.res);x.done=!x.done;sv(K.c,comps)}
- else if(d.cdel&&confirm("Delete your complaint?")){comps=comps.filter(c=>c.id!==d.cdel);sv(K.c,comps)}
- else return;render()});
-["tq","tf","tw","sq","sf","st2","sp"].forEach(id=>{$(id).addEventListener("input",render);$(id).addEventListener("change",render)});
-
-window.addEventListener("storage",()=>{if(!me)return;const before=me.role==="student"?unread().length:0;
- users=ld(K.u,users);posts=ld(K.p,posts);comps=ld(K.c,comps);reads=ld(K.r,reads);render();
- if(me.role==="student"&&unread().length>before)toast("🔔 New personal message from your teacher!")});
+  $("bellN").textContent=un;$("bellN").classList.toggle("hidden",!un);$("bell").classList.toggle("ring",un>0&&!pers);$("bell").classList.toggle("act",pers);
+  $("sbt").textContent=pers?"🔔 My Personal Messages":"📚 Noticeboard";
+  const sel=$("st2"),cur=sel.value,ids=[...new Set(posts.filter(p=>live(p)&&forMe(p)).map(p=>p.by))];
+  sel.innerHTML='<option value="">All teachers</option>'+ids.map(i=>`<option value="${i}">${esc(uBy(i)?.name||"Teacher")}</option>`).join("");sel.value=ids.includes(cur)?cur:"";
+  const l=vis.filter(p=>mt(p,$("sq").value,$("sf").value)&&(!sel.value||p.by===sel.value)&&(!pers||isP(p))).sort((a,b)=>isP(b)-isP(a)||b.from-a.from);
+  $("sfeed").innerHTML=l.length?l.map(p=>card(p,false)).join(""):empty;
+  $("scl").innerHTML=(l=>l.length?l.map(x=>ccard(x,false)).join(""):empty)(comps.filter(x=>x.pub||x.uid===me.id))}
+ if(tab==="chat")renderChat(force)}
+document.body.addEventListener("click",e=>{const b=e.target.closest("button"),d=b?b.dataset:{};
+ if(b){if(d.del&&confirm("Delete this update?")){posts=posts.filter(p=>p.id!==d.del);sv(K.p,posts)}
+  else if(d.res){const x=comps.find(c=>c.id===d.res);x.done=!x.done;sv(K.c,comps)}
+  else if(d.cdel&&confirm("Delete your complaint?")){comps=comps.filter(c=>c.id!==d.cdel);sv(K.c,comps)}
+  else if(d.dm){room=dm(me.id,d.dm);setTab("chat");return}
+  else if(d.room){room=d.room;renderChat(true);return}
+  else if(d.newg!==undefined){gform();return}
+  else if(d.gdel&&confirm("Delete this group and its messages?")){groups=groups.filter(g=>g.id!==d.gdel);msgs=msgs.filter(m=>m.room!=="g:"+d.gdel);sv(K.g,groups);sv(K.m,msgs);room=null}
+  else return;render(true);return}
+ const o=e.target.closest("[data-open]");if(o)openPost(o.dataset.open)});
+["tq","tf","tw","sq","sf","st2","stc"].forEach(id=>{$(id).addEventListener("input",()=>render());$(id).addEventListener("change",()=>render())});
+const vc=()=>msgs.filter(canSee).length;
+window.addEventListener("storage",()=>{if(!me)return;const bp=me.role==="student"?unread().length:0,bm=vc();
+ users=ld(K.u,users);posts=ld(K.p,posts);comps=ld(K.c,comps);reads=ld(K.r,reads);groups=ld(K.g,groups);msgs=ld(K.m,msgs);me=uBy(me.id)||me;render();
+ if(me.role==="student"&&unread().length>bp)toast("🔔 New personal message from your teacher!");else if(vc()>bm)toast("💬 New chat message!")});
 setInterval(()=>{if(me)render()},30000);
-const sid=ld(K.s,null),su=sid&&uById(sid);if(su)start(su);
+const sid=ld(K.s,null),su=sid&&uBy(sid);if(su)start(su);
 </script>
 </body>
 </html>
