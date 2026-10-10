@@ -271,7 +271,7 @@ function render(force){if(!me)return;purge();const t=me.role==="teacher";
   const w=$("tw");if(!w.dataset.d){w.dataset.d=1}
   const ss=students().filter(u=>!$("stc").value||u.cls===$("stc").value).sort((a,b)=>CLASSES.indexOf(a.cls)-CLASSES.indexOf(b.cls)||a.name.localeCompare(b.name));let last="",h="";
   ss.forEach(u=>{if(u.cls!==last){h+=(last?"</div>":"")+`<h4 style="margin:18px 0 0">${esc(u.cls)}</h4><div class="sg">`;last=u.cls}
-   h+=`<div class="stu">${av(u,46)}<div style="flex:1"><strong>${esc(u.name)}</strong><span class="sub">Age ${u.age} • last login ${u.last?fmt(u.last):"never"}</span></div><button class="ok" data-dm="${u.id}">💬</button></div>`});
+   h+=`<div class="stu">${av(u,46)}<div style="flex:1"><strong>${esc(u.name)}</strong><span class="sub">Age ${u.age} • last login ${u.last?fmt(u.last):"never"}</span></div><button class="ok" data-dm="${u.id}" title="Message">💬</button><button class="dng" data-rm="${u.id}" title="Remove student">🗑</button></div>`});
   $("slist").innerHTML=ss.length?h+"</div>":'<div class="empty">No students have signed up yet.</div>';
   $("tcl").innerHTML=comps.length?comps.map(x=>ccard(x,true)).join(""):empty;
  }else{
@@ -287,6 +287,12 @@ document.body.addEventListener("click",e=>{const b=e.target.closest("button"),d=
  if(b){if(d.del&&confirm("Delete this update?")){posts=posts.filter(p=>p.id!==d.del);sv(K.p,posts)}
   else if(d.res){const x=comps.find(c=>c.id===d.res);x.done=!x.done;sv(K.c,comps)}
   else if(d.cdel&&confirm("Delete your complaint?")){comps=comps.filter(c=>c.id!==d.cdel);sv(K.c,comps)}
+  else if(d.rm){const u=uBy(d.rm);if(!u||!confirm(`Remove ${u.name} from SchoolSync? Their account, chats and complaints will be deleted.`))return;
+   users=users.filter(x=>x.id!==u.id);posts=posts.filter(p=>p.aud!=="u:"+u.id);delete reads[u.id];comps=comps.filter(c=>c.uid!==u.id);
+   groups.forEach(g=>g.members=g.members.filter(i=>i!==u.id));
+   msgs=msgs.filter(m=>m.from!==u.id&&m.to!==u.id&&!(m.room[0]==="d"&&dmIds(m.room).includes(u.id)));
+   saveU();sv(K.p,posts);sv(K.r,reads);sv(K.c,comps);sv(K.g,groups);sv(K.m,msgs);
+   if(room&&room[0]==="d"&&dmIds(room).includes(u.id))room=null;toast("🗑 "+u.name+" was removed.")}
   else if(d.dm){room=dm(me.id,d.dm);setTab("chat");return}
   else if(d.room){room=d.room;renderChat(true);return}
   else if(d.newg!==undefined){gform();return}
@@ -296,7 +302,7 @@ document.body.addEventListener("click",e=>{const b=e.target.closest("button"),d=
 ["tq","tf","tw","sq","sf","st2","stc"].forEach(id=>{$(id).addEventListener("input",()=>render());$(id).addEventListener("change",()=>render())});
 const vc=()=>msgs.filter(canSee).length;
 window.addEventListener("storage",()=>{if(!me)return;const bp=me.role==="student"?unread().length:0,bm=vc();
- users=ld(K.u,users);posts=ld(K.p,posts);comps=ld(K.c,comps);reads=ld(K.r,reads);groups=ld(K.g,groups);msgs=ld(K.m,msgs);me=uBy(me.id)||me;render();
+ users=ld(K.u,users);posts=ld(K.p,posts);comps=ld(K.c,comps);reads=ld(K.r,reads);groups=ld(K.g,groups);msgs=ld(K.m,msgs);if(!uBy(me.id)){toast("Your account was removed by a teacher.");$("out").click();return}me=uBy(me.id);render();
  if(me.role==="student"&&unread().length>bp)toast("🔔 New personal message from your teacher!");else if(vc()>bm)toast("💬 New chat message!")});
 setInterval(()=>{if(me)render()},30000);
 const sid=ld(K.s,null),su=sid&&uBy(sid);if(su)start(su);
